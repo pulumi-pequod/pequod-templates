@@ -1,7 +1,7 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as awsx from "@pulumi/awsx";
 import * as eks from "@pulumi/eks";
-import { DatadogK8sAgent} from "@pequod/k8sdatadog";
+import { K8sMonitor } from "@pequod/k8sdatadog";
 import { StackSettings } from "@pequod/stackmgmt";
 
 // Grab some values from the Pulumi configuration (or use default values)
@@ -41,7 +41,7 @@ const eksCluster = new eks.Cluster(`${baseName}-eks`, {
     endpointPublicAccess: true,
 });
 
-const datadogK8sAgent = new DatadogK8sAgent(baseName, {
+const datadogK8sAgent = new K8sMonitor(baseName, {
     apiKey: apiKey,
 }, {provider: eksCluster.provider})
 
