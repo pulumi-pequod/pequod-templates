@@ -1,5 +1,6 @@
 pulumi>=3.32.1,<4.0.0
 pulumi-aws>=5.4.0,<6.0.0
+pulumi-kubernetes>=3.4.0,<4.0.0
 demo-components @ git+https://github.com/pulumi-demos/examples.git#subdirectory=python/components
 pequod_stackmgmt @ git+https://github.com/pulumi-pequod/pequod-mlc-stackmgmt.git#subdirectory=sdk/python/bin
 pequod_k8sdatadog @ git+https://github.com/pulumi-pequod/pequod-mlc-k8sdatadog.git#subdirectory=sdk/python/bin
