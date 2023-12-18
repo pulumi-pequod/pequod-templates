@@ -57,10 +57,11 @@ kubeconfig = pulumi.Output.secret(utils.generate_kube_config(eks_cluster))
 k8s_provider = k8s.Provider('k8s-provider', kubeconfig=kubeconfig, delete_unreachable=True)
 
 datadog_k8s_agent = K8sMonitor(f"{service_name}-mon", 
-    apiKey=config.require_sercret("datadogApiKey"),
+    apiKey=config.require_secret("datadogApiKey"),
     opts=pulumi.ResourceOptions(provider=k8s_provider))
 
 stackmgmt = StackSettings(f"{service_name}-stacksettings", 
                           drift_management=config.get("driftManagement"))
 
 pulumi.export('kubeconfig', kubeconfig)
+pulumi.export('datadogDashboard', eks_cluster.name.apply(lambda name: f"https://app.datadoghq.com/dash/integration/86/kubernetes---overview?refresh_mode=sliding&tpl_var_cluster%5B0%5D={name}&live=true".lower()))
