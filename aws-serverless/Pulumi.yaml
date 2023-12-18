@@ -1,0 +1,12 @@
+name: aws-serverless
+runtime: nodejs
+description: A Serverless application demo using Lambda and S3 Bucket events
+template:
+  description: AWS Serverless Application
+  config:
+    aws:region:
+      description: The AWS region to deploy into
+      default: us-west-2
+    driftManagement:
+      description: Set to "Refresh" to periodically refresh state or set to "Correct" to also run an update after refresh.
+      default: Correct

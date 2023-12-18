@@ -1,0 +1,12 @@
+name: k8s-guestbook
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: K8s guestbook app deployed to existing infra.
+template:
+  description: K8s application deployed to shared cluster.
+  config:
+    base_infra_stack_name: 
+      description: Name of base k8s infra stack to use in form of "project/stack"
+      default: shared-dev-eks/dev 

@@ -1,2 +1,2 @@
 # pequod-templates
-New Project Wizard templates
+New Project Wizard templates for the Pulumi pequod org.

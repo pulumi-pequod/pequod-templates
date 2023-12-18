@@ -1,0 +1,4 @@
+environment:
+  - aws-access
+  - datadog-access
+  - stackmgmt

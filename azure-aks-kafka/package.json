@@ -1,0 +1,25 @@
+{
+    "name": "azure-ts-aks-helm",
+    "devDependencies": {
+        "@types/node": "^10.0.0"
+    },
+    "scripts": {
+        "preinstall": "npm run esc:install && npm run esc:login",
+        "esc:install": "curl -fsSL https://get.pulumi.com/esc/install.sh | sh",
+        "esc:login": "esc login",
+        "install": "npm run esc:cologin && npm run copkgs:install",
+        "esc:cologin": "esc run pequod/aws-access -- npm run co:login",
+        "co:login": "aws codeartifact login --tool npm --region us-east-2 --repository pequod-codeartifact-repo --domain pequod-codeartifact-domain",
+        "copkgs:install": "npm i @pequod/k8sdatadog @pequod/stackmgmt --no-save"
+    },
+    "dependencies": {
+        "@pulumi/azure": "^5.43.0",
+        "@pulumi/azure-native": "^2.0.0",
+        "@pulumi/azuread": "^5.46.0",
+        "@pulumi/confluentcloud": "^1.6.0",
+        "@pulumi/kubernetes": "^3.0.0",
+        "@pulumi/pulumi": "^3.0.0",
+        "@pulumi/random": "^4.0.0",
+        "@pulumi/tls": "^4.0.0"
+    }
+}

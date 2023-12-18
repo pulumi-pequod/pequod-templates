@@ -1,0 +1,15 @@
+name: aws-ts-fargate-rds-base
+runtime: nodejs
+description: AWS ALB + ECS Fargate + RDS with Datadog Monitoring
+template:
+  description: AWS ALB + ECS Fargate + RDS with Datadog Monitoring
+  config:
+    aws:region:
+      description: The AWS region to deploy into
+      default: us-west-2
+    dbName:
+      description: Backend DB name
+      default: backend
+    dbUser:
+      description: Backend DB user
+      default: admin

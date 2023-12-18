@@ -1,0 +1,22 @@
+{
+    "name": "aws-ts-wordpress-fargate-rds",
+    "main": "index.ts",
+    "devDependencies": {
+        "@types/node": "^16"
+    },
+    "scripts": {
+        "preinstall": "npm run esc:install && npm run esc:login", 
+        "esc:install": "curl -fsSL https://get.pulumi.com/esc/install.sh | sh",
+        "esc:login": "esc login",
+        "install": "npm run esc:cologin && npm run copkgs:install",
+        "esc:cologin": "esc run pequod/aws-access -- npm run co:login",
+        "co:login": "aws codeartifact login --tool npm --region us-east-2 --repository pequod-codeartifact-repo --domain pequod-codeartifact-domain",
+        "copkgs:install": "npm i @pequod/stackmgmt --no-save"
+    },
+    "dependencies": {
+        "@pulumi/aws": "^5.0.0",
+        "@pulumi/awsx": "^1.0.0",
+        "@pulumi/pulumi": "^3.0.0",
+        "@pulumi/random": "^4.12.1"
+    }
+}
