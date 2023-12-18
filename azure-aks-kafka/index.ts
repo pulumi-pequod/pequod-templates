@@ -3,7 +3,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as resources from "@pulumi/azure-native/resources";
 import * as k8s from "@pulumi/kubernetes";
 
-import { DatadogK8sAgent} from "@pequod/k8sdatadog";
+import { K8sMonitor} from "@pequod/k8sdatadog";
 import { StackSettings } from "@pequod/stackmgmt";
 
 // Custom component resources
@@ -36,7 +36,7 @@ const k8sProvider = new k8s.Provider("k8sprovider", {
     kubeconfig: cluster.kubeconfig
 })
 
-const datadogK8sAgent = new DatadogK8sAgent(baseName, {
+const datadogK8sAgent = new K8sMonitor(baseName, {
     apiKey: config.apiKey,
 }, {provider: k8sProvider})
 
