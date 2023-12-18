@@ -1,8 +1,11 @@
 # Pulumi SDKs
 import pulumi
 from pulumi_aws import eks
+import pulumi_kubernetes as k8s
 
 # components
+from pequod_stackmgmt import StackSettings, StackSettingsArgs
+from pequod_k8sdatadog import K8sMonitor, K8sMonitorArgs
 from aws_network import Vpc, VpcArgs 
 
 # local python modules
@@ -17,7 +20,7 @@ max_size = config.get_int("maxClusterSize") or 2
 min_size = config.get_int("minClusterSize") or 1
 
 ## VPC and related resources
-vpc =Vpc(f'{service_name}-net', VpcArgs()) 
+vpc = Vpc(f'{service_name}-net', VpcArgs()) 
 
 ## EKS Cluster
 eks_cluster = eks.Cluster(
@@ -49,4 +52,15 @@ eks_node_group = eks.NodeGroup(
     ),
 )
 
-pulumi.export('kubeconfig', pulumi.Output.secret(utils.generate_kube_config(eks_cluster)))
+kubeconfig = pulumi.Output.secret(utils.generate_kube_config(eks_cluster))
+
+k8s_provider = k8s.Provider('k8s-provider', kubeconfig=kubeconfig, delete_unreachable=True)
+
+datadog_k8s_agent = K8sMonitor(f"{service_name}-mon", 
+    apiKey=config.require_sercret("datadogApiKey"),
+    opts=pulumi.ResourceOptions(provider=k8s_provider))
+
+stackmgmt = StackSettings(f"{service_name}-stacksettings", 
+                          drift_management=config.get("driftManagement"))
+
+pulumi.export('kubeconfig', kubeconfig)
