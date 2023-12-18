@@ -57,7 +57,7 @@ kubeconfig = pulumi.Output.secret(utils.generate_kube_config(eks_cluster))
 k8s_provider = k8s.Provider('k8s-provider', kubeconfig=kubeconfig, delete_unreachable=True)
 
 datadog_k8s_agent = K8sMonitor(f"{service_name}-mon", 
-    apiKey=config.require_secret("datadogApiKey"),
+    api_key=config.require_secret("datadogApiKey"),
     opts=pulumi.ResourceOptions(provider=k8s_provider))
 
 stackmgmt = StackSettings(f"{service_name}-stacksettings", 
