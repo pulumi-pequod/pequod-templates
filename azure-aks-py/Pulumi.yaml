@@ -1,0 +1,24 @@
+name: azure-aks-base-infra-py
+description: Pulumi project to deploy AKS and Kafka infrastructure
+runtime:
+    name: python
+    options:
+        virtualenv: venv
+template:
+  description: Azure AKS with Confluent Kafka and Datadog
+  config:
+    azure-native:location: 
+      description: The Azure region to deploy into
+      default: CentralUS
+    adminUserName:
+      description: k8s cluster admin username
+      default: "k8sadmin"
+    nodeCount:
+      description: Number of nodes in k8s cluster.
+      default: 2
+    nodeSize:
+      description: Node size for k8s cluster.
+      default: "Standard_D2_v2"
+    driftManagement:
+      description: Set to "Refresh" to periodically refresh state or set to "Correct" to also run an update after refresh.
+      default: Correct

@@ -5,10 +5,10 @@ import * as k8s from "@pulumi/kubernetes";
 
 import { K8sMonitor} from "@pequod/k8sdatadog";
 import { StackSettings } from "@pequod/stackmgmt";
+import { ConfluentCluster } from "@pequod/kafkacluster"; 
 
 // Custom component resources
 import { K8sCluster } from "./k8scluster"; // TODO: maybe move to central artifactory
-import { KafkaCluster } from "./kafkacluster"; // TODO: move to central artifactory
 
 // Typescript modules
 import * as config from "./config";
@@ -16,7 +16,7 @@ import * as config from "./config";
 const baseName = config.baseName;
 const rgName = `${baseName}-rg`
 
-const kafka = new KafkaCluster(baseName, {
+const kafka = new ConfluentCluster(baseName, {
     kafkaClusterName: config.kafkaClusterName,
     kafkaTopics: config.kafkaTopics
 })
@@ -42,7 +42,8 @@ const datadogK8sAgent = new K8sMonitor(baseName, {
 
 const stackmgmt = new StackSettings(baseName, {driftManagement: config.driftManagement})
 
-export const kafkaUrl = pulumi.interpolate`https://confluent.cloud/environments/${kafka.envId}/clusters`
+export const kafkaUrl = kafka.kafkaUrl;
+export const kafkaEnvironmentName = kafka.envId;
 export const k8sClusterName = cluster.clusterName;
 export const kubeconfig = cluster.kubeconfig;
 export const datadogDashboard = k8sClusterName.apply(name => `https://app.datadoghq.com/dash/integration/86/kubernetes---overview?refresh_mode=sliding&tpl_var_cluster%5B0%5D=${name}&live=true`.toLowerCase())
