@@ -25,7 +25,6 @@ cluster = AksCluster(base_name, AksClusterArgs(
     cluster_node_count=config.node_count,
     cluster_node_size=config.node_size,
     admin_username=config.admin_username,
-    ssh_public_key=config.ssh_public_key
 ), opts=ResourceOptions())
 
 kafka = ConfluentCluster(f"{base_name}-kafka", 

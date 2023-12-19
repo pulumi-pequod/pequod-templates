@@ -13,7 +13,6 @@ class AksClusterArgs:
                  cluster_node_count=None,
                  cluster_node_size=None,
                  admin_username=None,
-                 ssh_public_key=None,
                  ):
 
         self.rg_name = rg_name 
@@ -21,8 +20,6 @@ class AksClusterArgs:
         self.cluster_node_count = cluster_node_count
         self.cluster_node_size = cluster_node_size
         self.admin_username = admin_username
-        self.ssh_public_key = ssh_public_key
-
 
 class AksCluster(ComponentResource):
 
@@ -39,9 +36,8 @@ class AksCluster(ComponentResource):
         cluster_node_count = args.cluster_node_count
         cluster_node_size = args.cluster_node_size
         admin_username = args.admin_username
-        ssh_public_key = args.ssh_public_key
 
-        privateKey = tls.PrivateKey(f"{name}-privateKey", 
+        private_key = tls.PrivateKey(f"{name}-privateKey", 
             algorithm="RSA",
             rsa_bits=4096,
             opts=opts)
@@ -75,7 +71,7 @@ class AksCluster(ComponentResource):
                 'admin_username': admin_username,
                 'ssh': {
                     'publicKeys': [{
-                        'keyData': ssh_public_key,
+                        'keyData': private_key.public_key_openssh
                     }],
                 },
             },
