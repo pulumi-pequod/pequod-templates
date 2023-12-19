@@ -11,11 +11,6 @@ export var k8sVersion = config.get("k8sVersion") || azure.containerservice.getKu
         location: azConfig.require("location")
     }).then(current => current.latestVersion)
 
-export const password = config.get("password") || new random.RandomPassword(`${baseName}-pw`, {
-    length: 20,
-    special: true,
-}).result;
-
 export const adminUserName = config.get("adminUserName") || "testuser";
 
 export const nodeCount = config.getNumber("nodeCount") || 2;

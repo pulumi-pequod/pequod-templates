@@ -1,4 +1,4 @@
-name: azure-aks-base-infra-py
+name: azure-aks-kafka-py
 description: Pulumi project to deploy AKS and Kafka infrastructure
 runtime:
     name: python

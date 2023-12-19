@@ -1,4 +1,4 @@
-name: azure-aks-kafka
+name: azure-aks-kafka-ts
 runtime: nodejs
 description: Pulumi project to deploy AKS and Kafka infrastructure
 template:
