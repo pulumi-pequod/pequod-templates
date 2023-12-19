@@ -21,6 +21,7 @@ resource_group = resources.ResourceGroup(f"{base_name}-rg")
 
 cluster = AksCluster(base_name, AksClusterArgs(
     rg_name=resource_group.name,
+    rg_id=resource_group.id,
     cluster_node_count=config.node_count,
     cluster_node_size=config.node_size,
     admin_username=config.admin_username,
