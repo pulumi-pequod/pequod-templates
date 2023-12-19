@@ -44,5 +44,5 @@ export("resource_group", resource_group.name)
 export("kubeconfig", Output.secret(cluster.kubeconfig))
 export("kafkaUrl", kafka.kafka_url)
 export("kafkaEnvironmentName", kafka.env_id)
-export("datadogDashboard", cluster.name.apply(lambda name: f"https://app.datadoghq.com/dash/integration/86/kubernetes---overview?refresh_mode=sliding&tpl_var_cluster%5B0%5D={name}&live=true".lower()))
+export("datadogDashboard", cluster.cluster_name.apply(lambda name: f"https://app.datadoghq.com/dash/integration/86/kubernetes---overview?refresh_mode=sliding&tpl_var_cluster%5B0%5D={name}&live=true".lower()))
 
