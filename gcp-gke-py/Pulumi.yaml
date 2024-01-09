@@ -7,6 +7,9 @@ description: A Google Kubernetes Engine (GKE) cluster, with canary deployment
 template:
   description: A Google Kubernetes Engine (GKE) cluster, with canary deployment
   config:
+    gcp:zone: 
+      description: GCP zone to deploy into.
+      default: us-central1-a    
     masterVersion:
       description: K8s version to use. Latest supported version is used if not set.
     nodeMachineType:

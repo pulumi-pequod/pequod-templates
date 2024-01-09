@@ -55,8 +55,8 @@ datadog_k8s_agent = K8sMonitor(f"{service_name}-mon",
     api_key=config.require_secret("datadogApiKey"),
     opts=pulumi.ResourceOptions(provider=k8s_provider))
 
-stackmgmt = StackSettings(f"{service_name}-stacksettings", 
-                          drift_management=config.get("driftManagement"))
+# stackmgmt = StackSettings(f"{service_name}-stacksettings", 
+#                           drift_management=config.get("driftManagement"))
 
 pulumi.export('kubeconfig', k8s_cluster.kubeconfig)
 pulumi.export("cluster_name", k8s_cluster.cluster_name)
