@@ -1,0 +1,27 @@
+name: gcp-gke-py
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: A Google Kubernetes Engine (GKE) cluster, with canary deployment
+template:
+  description: A Google Kubernetes Engine (GKE) cluster, with canary deployment
+  config:
+    gcp:project: 
+      description: GCP Project to launch into.
+      default: pulumi-ce-team
+    gcp:zone: 
+      description: GCP zone to launch into.
+      default: us-central1-a
+    masterVersion:
+      description: K8s version to use. Latest supported version is used if not set.
+    nodeMachineType:
+      description: Node type to use.
+      default: n1-standard-1
+    nodeCount:
+      description: Desired number of nodes in the cluster
+      default: 3
+    driftManagement:
+      description: Set to "Refresh" to periodically refresh state or set to "Correct" to also run an update after refresh.
+      default: Correct
+
