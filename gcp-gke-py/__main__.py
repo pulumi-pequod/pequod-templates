@@ -14,15 +14,13 @@ from pequod_stackmgmt import StackSettings
 from pequod_k8sdatadog import K8sMonitor
 
 # Stack Config
-gcp_config = pulumi.Config("gcp")
-project = gcp_config.require("project")
 config = pulumi.Config()
 service_name = config.get("service_name") or pulumi.get_project()
 master_version = config.get("masterVersion") or container.get_engine_versions().latest_master_version
 node_machine_type = config.get("nodeMachineType") or "n1-standard-1"
 node_count = config.get("nodeCount") or 3 
 
-base_name = f"gkebase-py-{pulumi.get_stack()}"
+base_name = pulumi.get_project()
 
 # Create a GKE cluster using the component resource 
 k8s_cluster = Cluster(base_name, ClusterArgs(

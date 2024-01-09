@@ -7,12 +7,6 @@ description: A Google Kubernetes Engine (GKE) cluster, with canary deployment
 template:
   description: A Google Kubernetes Engine (GKE) cluster, with canary deployment
   config:
-    gcp:project: 
-      description: GCP Project to launch into.
-      default: pulumi-ce-team
-    gcp:zone: 
-      description: GCP zone to launch into.
-      default: us-central1-a
     masterVersion:
       description: K8s version to use. Latest supported version is used if not set.
     nodeMachineType:
