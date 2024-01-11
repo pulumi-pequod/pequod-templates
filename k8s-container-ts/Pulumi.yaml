@@ -1,0 +1,9 @@
+name: k8s-container
+runtime: nodejs
+description: K8s container app deployed to existing infra.
+template:
+  description: K8s container deployed to shared cluster.
+  config:
+    baseInfraStackName: 
+      description: Name of base k8s infra stack to use in form of "project/stack"
+      default: shared-dev-eks/dev 
