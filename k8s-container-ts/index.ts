@@ -4,7 +4,7 @@ import * as awsx from "@pulumi/awsx";
 import { StackSettings } from "@pequod/stackmgmt";
 
 import { ServiceDeployment } from "./servicedeployment";
-import { baseName, driftManagement, kubeconfig } from "./config";
+import { baseName, driftManagement, kubeconfig, pulumiAccessToken } from "./config";
 
 const imageRepository = new awsx.ecr.Repository("imageRepository", {
     forceDelete: true
@@ -33,6 +33,6 @@ const frontend = new ServiceDeployment("frontend", {
     allocateIpAddress: true,
 }, { provider: k8sProvider });
 
-const stackmgmt = new StackSettings(baseName, {driftManagement: driftManagement})
+const stackmgmt = new StackSettings(baseName, {driftManagement: driftManagement, pulumiAccessToken: pulumiAccessToken})
 
 export const frontendIp = pulumi.interpolate`http://${frontend.ipAddress}`;

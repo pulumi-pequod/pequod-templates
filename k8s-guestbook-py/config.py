@@ -11,3 +11,6 @@ k8s_stack_name = f"{get_organization()}/{base_infra_stack_name}"
 k8s_stack_ref = StackReference(k8s_stack_name)
 
 kubeconfig = k8s_stack_ref.require_output("kubeconfig") 
+
+pulumi_config = Config("pulumiservice")
+pulumi_access_token = pulumi_config.get("accessToken")

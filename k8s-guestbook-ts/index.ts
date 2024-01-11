@@ -3,7 +3,7 @@ import * as k8s from "@pulumi/kubernetes";
 import { StackSettings } from "@pequod/stackmgmt";
 
 import { ServiceDeployment } from "./servicedeployment";
-import { baseName, driftManagement, kubeconfig } from "./config";
+import { baseName, driftManagement, kubeconfig, pulumiAccessToken } from "./config";
 
 const k8sProvider = new k8s.Provider('k8s-provider', {
   kubeconfig: kubeconfig,
@@ -33,6 +33,6 @@ const frontend = new ServiceDeployment("frontend", {
     allocateIpAddress: true,
 }, { provider: k8sProvider });
 
-const stackmgmt = new StackSettings(baseName, {driftManagement: driftManagement})
+const stackmgmt = new StackSettings(baseName, {driftManagement: driftManagement, pulumiAccessToken: pulumiAccessToken})
 
 export const frontendIp = pulumi.interpolate`http://${frontend.ipAddress}`;

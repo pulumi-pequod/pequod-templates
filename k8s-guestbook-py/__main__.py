@@ -52,6 +52,8 @@ frontend = ServiceDeployment(
     opts=pulumi.ResourceOptions(provider=k8s_provider))
 
 stackmgmt = StackSettings(base_name, 
-                          drift_management=config.drift_management)
+                          drift_management=config.drift_management,
+                          pulumi_access_token=config.pulumi_access_token,
+                          )
 
 pulumi.export("guestbook_url", pulumi.Output.concat("http://",frontend.ip_address))
