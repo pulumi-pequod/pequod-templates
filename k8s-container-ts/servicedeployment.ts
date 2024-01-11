@@ -22,7 +22,7 @@ export class ServiceDeployment extends pulumi.ComponentResource {
             image: args.image,
             resources: args.resources || { requests: { cpu: "100m", memory: "100Mi" } },
             env: [{ name: "GET_HOSTS_FROM", value: "dns" }],
-            ports: args.ports && args.ports.map(p => ({ containerPort: p })),
+            ports: [{ containerPort: args.containerPort }],
         };
         this.deployment = new k8s.apps.v1.Deployment(name, {
             metadata: {
@@ -45,7 +45,10 @@ export class ServiceDeployment extends pulumi.ComponentResource {
                 labels: this.deployment.metadata.labels,
             },
             spec: {
-                ports: args.ports && args.ports.map(p => ({ port: p, targetPort: p })),
+                ports: [{
+                    port: args.hostPort,
+                    targetPort: args.containerPort
+                }],
                 selector: this.deployment.spec.template.metadata.labels,
                 // Minikube does not implement services of type `LoadBalancer`; require the user to specify if we're
                 // running on minikube, and if so, create only services of type ClusterIP.
@@ -69,7 +72,8 @@ export interface ServiceDeploymentArgs {
     namespace: pulumi.Input<string> | string;
     resources?: k8stypes.core.v1.ResourceRequirements;
     replicas?: number;
-    ports?: number[];
+    containerPort: pulumi.Input<number>;
+    hostPort: pulumi.Input<number>;
     allocateIpAddress?: boolean;
     isMinikube?: boolean;
 }

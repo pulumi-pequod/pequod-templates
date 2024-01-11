@@ -28,7 +28,8 @@ const frontend = new ServiceDeployment("frontend", {
     replicas: 3,
     image: image.imageUri,
     namespace: containerNsName,
-    ports: [80],
+    containerPort: 8080,
+    hostPort: 80,
     allocateIpAddress: true,
 }, { provider: k8sProvider });
 
