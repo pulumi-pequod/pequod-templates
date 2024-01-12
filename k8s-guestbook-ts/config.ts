@@ -13,4 +13,4 @@ const k8sStackRef = new StackReference(k8sStackName)
 export const kubeconfig = k8sStackRef.requireOutput("kubeconfig") 
 
 const pulumiServiceConfig = new Config("pulumiservice")
-export const pulumiAccessToken = pulumiServiceConfig.get("accessToken")
+export const pulumiAccessToken = pulumiServiceConfig.getSecret("accessToken")

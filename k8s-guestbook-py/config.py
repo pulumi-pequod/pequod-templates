@@ -13,4 +13,4 @@ k8s_stack_ref = StackReference(k8s_stack_name)
 kubeconfig = k8s_stack_ref.require_output("kubeconfig") 
 
 pulumi_config = Config("pulumiservice")
-pulumi_access_token = pulumi_config.get("accessToken")
+pulumi_access_token = pulumi_config.get_secret("accessToken")
