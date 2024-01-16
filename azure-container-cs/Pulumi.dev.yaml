@@ -1,0 +1,3 @@
+environment:
+  - azure-access
+  - stackmgmt
