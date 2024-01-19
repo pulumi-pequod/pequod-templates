@@ -75,7 +75,7 @@ return await Pulumi.Deployment.RunAsync(() =>
         {
             new AzureNative.ContainerInstance.Inputs.ContainerArgs {
                 Name = imageName,
-                Image = image.ImageName,
+                Image = image.RepoDigest,
                 Ports = new[]
                 {
                     new AzureNative.ContainerInstance.Inputs.ContainerPortArgs {
