@@ -1,6 +1,6 @@
-name: k8s-container
+name: ${PROJECT}
 runtime: nodejs
-description: K8s container app deployed to existing infra.
+description: ${DESCRIPTION}
 template:
   description: K8s container deployed to shared cluster.
   config:
