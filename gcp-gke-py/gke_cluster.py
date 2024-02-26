@@ -36,7 +36,7 @@ class GkeCluster(ComponentResource):
                                         min_master_version=master_version,
                                         opts=ResourceOptions(parent=self))
 
-        node_pool = container.NodePool(f"{name}-primary-node-pool", 
+        node_pool = container.NodePool(f"{name}-pool", 
                                         cluster=k8s_cluster.name,
                                         initial_node_count=node_count,
                                         location=k8s_cluster.location,
