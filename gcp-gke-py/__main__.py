@@ -1,4 +1,9 @@
-"""A Google Cloud Python Pulumi program"""
+"""
+Deploys:
+- GKE cluster and node pool
+- Canary deployment on the cluster
+- Datadog K8s monitor on the cluster
+"""
 
 # Pulumi-provided packages
 import pulumi
