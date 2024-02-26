@@ -34,6 +34,7 @@ eks_cluster = eks.Cluster(
         security_group_ids=[vpc.fe_security_group.id],
         subnet_ids=vpc.subnet_ids,
     ),
+    opts=pulumi.ResourceOptions(depends_on=[iam.eks_service_pol_attach, iam.eks_cluster_pol_attach])
 )
 
 eks_node_group = eks.NodeGroup(
