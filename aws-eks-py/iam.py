@@ -20,14 +20,14 @@ eks_role = iam.Role(
     }),
 )
 
-iam.RolePolicyAttachment(
+eks_service_pol_attach = iam.RolePolicyAttachment(
     'eks-service-policy-attachment',
     role=eks_role.id,
     policy_arn='arn:aws:iam::aws:policy/AmazonEKSServicePolicy',
 )
 
 
-iam.RolePolicyAttachment(
+eks_cluster_pol_attach = iam.RolePolicyAttachment(
     'eks-cluster-policy-attachment',
     role=eks_role.id,
     policy_arn='arn:aws:iam::aws:policy/AmazonEKSClusterPolicy',
