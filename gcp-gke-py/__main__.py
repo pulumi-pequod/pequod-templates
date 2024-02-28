@@ -28,7 +28,7 @@ node_count = config.get("nodeCount") or 3
 base_name = pulumi.get_project()
 
 # Create a GKE cluster using the component resource 
-k8s_cluster = Cluster(base_name, ClusterArgs(
+k8s_cluster = Cluster(base_name[:12], ClusterArgs(
     master_version=master_version,
     node_count=node_count,
     node_machine_type=node_machine_type

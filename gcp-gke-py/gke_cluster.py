@@ -30,13 +30,16 @@ class GkeCluster(ComponentResource):
         node_count = args.node_count or 3
         node_machine_type = args.node_machine_type or "n1-standard-1"
 
-        k8s_cluster = container.Cluster(f"{name}-cluster", 
+        # cluster and node pool naming has length limits in GCP, so make sure the base name isn't too long and shorten it to 12 characters.
+        base_name = name[:12]
+
+        k8s_cluster = container.Cluster(f"{base_name}-cluster", 
                                         initial_node_count=1,
                                         remove_default_node_pool=True,
                                         min_master_version=master_version,
                                         opts=ResourceOptions(parent=self))
 
-        node_pool = container.NodePool(f"{name}-pool", 
+        node_pool = container.NodePool(f"{base_name}-pool", 
                                         cluster=k8s_cluster.name,
                                         initial_node_count=node_count,
                                         location=k8s_cluster.location,
