@@ -1,6 +1,6 @@
-name: aws-eks-ts
+name: ${PROJECT}
 runtime: nodejs
-description: AWS VPC and EKS Deployment with Datadog
+description: ${DESCRIPTION}
 template:
   description: AWS VPC and EKS Deployment with Datadog
   config:

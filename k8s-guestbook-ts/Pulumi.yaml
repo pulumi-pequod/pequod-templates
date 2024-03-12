@@ -1,6 +1,6 @@
-name: k8s-guestbook
+name: ${PROJECT}
 runtime: nodejs
-description: K8s guestbook app deployed to existing infra.
+description: ${DESCRIPTION}
 template:
   description: K8s application deployed to shared cluster.
   config:

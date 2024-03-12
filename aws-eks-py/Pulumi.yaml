@@ -1,9 +1,9 @@
-name: aws-eks-py
+name: ${PROJECT}
 runtime:
   name: python
   options:
     virtualenv: venv
-description: AWS VPC and EKS Deployment with Datadog
+description: ${DESCRIPTION}
 template:
   description: AWS VPC and EKS Deployment with Datadog
   config:
