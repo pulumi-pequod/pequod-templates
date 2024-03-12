@@ -1,6 +1,6 @@
-name: azure-container-cs
+name: ${PROJECT}
 runtime: dotnet
-description: A C# program to deploy a containerized service on Azure
+description: ${DESCRIPTION}
 template:
   description: A C# program to deploy a containerized service on Azure
   config:

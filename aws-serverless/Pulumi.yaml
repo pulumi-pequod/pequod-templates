@@ -1,6 +1,6 @@
-name: aws-serverless
+name: ${PROJECT}
 runtime: nodejs
-description: A Serverless application demo using Lambda and S3 Bucket events
+description: ${DESCRIPTION}
 template:
   description: AWS Serverless Application
   config:

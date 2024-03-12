@@ -1,9 +1,9 @@
-name: gcp-gke-py
+name: ${PROJECT}
 runtime:
   name: python
   options:
     virtualenv: venv
-description: A Google Kubernetes Engine (GKE) cluster, with canary deployment
+description: ${DESCRIPTION}
 template:
   description: A Google Kubernetes Engine (GKE) cluster, with canary deployment
   config:

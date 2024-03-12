@@ -1,6 +1,6 @@
-name: aws-ts-fargate-rds-base
+name: ${PROJECT}
 runtime: nodejs
-description: AWS ALB + ECS Fargate + RDS with Datadog Monitoring
+description: ${DESCRIPTION}
 template:
   description: AWS ALB + ECS Fargate + RDS with Datadog Monitoring
   config:
