@@ -16,10 +16,13 @@ import * as config from "./config";
 const baseName = config.baseName;
 const rgName = `${baseName}-rg`
 
-const kafka = new ConfluentCluster(baseName, {
-    kafkaClusterName: config.kafkaClusterName,
-    kafkaTopics: config.kafkaTopics
-})
+//// Kafka temporarily removed while we wait for our Confluent Cloud account.
+// const kafka = new ConfluentCluster(baseName, {
+//     kafkaClusterName: config.kafkaClusterName,
+//     kafkaTopics: config.kafkaTopics
+// })
+// export const kafkaUrl = kafka.kafkaUrl;
+// export const kafkaEnvironmentName = kafka.envId;
 
 const resourceGroup = new resources.ResourceGroup(rgName, { resourceGroupName: rgName } );
 
@@ -42,8 +45,6 @@ const datadogK8sAgent = new K8sMonitor(baseName, {
 
 const stackmgmt = new StackSettings(baseName, {driftManagement: config.driftManagement})
 
-export const kafkaUrl = kafka.kafkaUrl;
-export const kafkaEnvironmentName = kafka.envId;
 export const k8sClusterName = cluster.clusterName;
 export const kubeconfig = cluster.kubeconfig;
 export const datadogDashboard = k8sClusterName.apply(name => `https://app.datadoghq.com/dash/integration/86/kubernetes---overview?refresh_mode=sliding&tpl_var_cluster%5B0%5D=${name}&live=true`.toLowerCase())

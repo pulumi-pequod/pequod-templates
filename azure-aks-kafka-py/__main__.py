@@ -27,10 +27,13 @@ cluster = AksCluster(base_name, AksClusterArgs(
     admin_username=config.admin_username,
 ), opts=ResourceOptions())
 
-kafka = ConfluentCluster(f"{base_name}-kafka", 
-    kafka_cluster_name=config.kafka_cluster_name,
-    kafka_topics=config.kafka_topics
-)
+## Kafka temporarily removed while we wait for our Confluent Cloud account.
+# kafka = ConfluentCluster(f"{base_name}-kafka", 
+#     kafka_cluster_name=config.kafka_cluster_name,
+#     kafka_topics=config.kafka_topics
+# )
+# export("kafkaUrl", kafka.kafka_url)
+# export("kafkaEnvironmentName", kafka.env_id)
 
 datadog_k8s_agent = K8sMonitor(f"{base_name}-mon", 
     api_key=config.datadog_api_key,
@@ -41,7 +44,6 @@ stackmgmt = StackSettings(f"{base_name}-stacksettings",
 
 export("resource_group", resource_group.name)
 export("kubeconfig", Output.secret(cluster.kubeconfig))
-export("kafkaUrl", kafka.kafka_url)
-export("kafkaEnvironmentName", kafka.env_id)
+
 export("datadogDashboard", cluster.cluster_name.apply(lambda name: f"https://app.datadoghq.com/dash/integration/86/kubernetes---overview?refresh_mode=sliding&tpl_var_cluster%5B0%5D={name}&live=true".lower()))
 
