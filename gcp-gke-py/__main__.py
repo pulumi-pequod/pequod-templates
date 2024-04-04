@@ -56,13 +56,13 @@ canary = Deployment("canary",
     opts=pulumi.ResourceOptions(provider=k8s_provider)
 )
 
-datadog_k8s_agent = K8sMonitor(f"{service_name}-mon", 
-    api_key=config.require_secret("datadogApiKey"),
-    opts=pulumi.ResourceOptions(provider=k8s_provider))
+# datadog_k8s_agent = K8sMonitor(f"{service_name}-mon", 
+#    api_key=config.require_secret("datadogApiKey"),
+#    opts=pulumi.ResourceOptions(provider=k8s_provider))
 
 stackmgmt = StackSettings(f"{service_name}-stacksettings", 
                           drift_management=config.get("driftManagement"))
 
 pulumi.export('kubeconfig', k8s_cluster.kubeconfig)
 pulumi.export("cluster_name", k8s_cluster.cluster_name)
-pulumi.export('datadogDashboard', k8s_cluster.cluster_name.apply(lambda name: f"https://app.datadoghq.com/dash/integration/86/kubernetes---overview?refresh_mode=sliding&tpl_var_cluster%5B0%5D={name}&live=true".lower()))
+# pulumi.export('datadogDashboard', k8s_cluster.cluster_name.apply(lambda name: f"https://app.datadoghq.com/dash/integration/86/kubernetes---overview?refresh_mode=sliding&tpl_var_cluster%5B0%5D={name}&live=true".lower()))
