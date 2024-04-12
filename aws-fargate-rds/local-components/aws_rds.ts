@@ -39,7 +39,7 @@ export class Db extends pulumi.ComponentResource {
       dbSubnetGroupName: rdsSubnetGroup.name,
       allocatedStorage: 20,
       engine: "mysql",
-      engineVersion: "5.7",
+      engineVersion: "8.0",
       instanceClass: "db.t4g.micro",
       storageType: "gp2",
       skipFinalSnapshot: true,
