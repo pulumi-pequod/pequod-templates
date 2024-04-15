@@ -1,0 +1,21 @@
+name: ${PROJECT}
+description: ${DESCRIPTION}
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+template:
+  description: Deploy one or more EC2 instances running a simple webserver.
+  config:
+    aws:region:
+      description: The AWS region to deploy into
+      default: us-west-2
+    instanceType:
+      description: The Amazon EC2 instance type
+      default: t3.micro
+    numInstances:
+      description: Number of instances to deploy
+      default: 1
+    vpcNetworkCidr:
+      description: The network CIDR to use for the VPC
+      default: 10.0.0.0/16
