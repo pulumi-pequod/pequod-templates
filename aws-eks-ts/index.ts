@@ -19,6 +19,9 @@ const baseName = `${pulumi.getProject()}-${pulumi.getOrganization()}`
 const eksVpc = new awsx.ec2.Vpc(`${baseName}-vpc`, {
     enableDnsHostnames: true,
     cidrBlock: vpcNetworkCidr,
+    natGateways: {
+        strategy: awsx.ec2.NatGatewayStrategy.Single
+    }
 });
 
 // Create the EKS cluster
