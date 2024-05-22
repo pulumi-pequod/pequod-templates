@@ -33,6 +33,6 @@ const frontend = new ServiceDeployment("frontend", {
     allocateIpAddress: true,
 }, { provider: k8sProvider });
 
-const stackmgmt = new StackSettings(baseName, {driftManagement: driftManagement, pulumiAccessToken: pulumiAccessToken})
+const stackmgmt = new StackSettings(baseName, {driftManagement: driftManagement})
 
 export const frontendIp = pulumi.interpolate`http://${frontend.ipAddress}`;
