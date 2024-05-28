@@ -4,6 +4,7 @@ using Pulumi;
 using AzureNative = Pulumi.AzureNative;
 using Docker = Pulumi.Docker;
 using Random = Pulumi.Random;
+using Pequod.Stackmgmt;
 
 return await Pulumi.Deployment.RunAsync(() =>
 {
@@ -110,6 +111,8 @@ return await Pulumi.Deployment.RunAsync(() =>
             },
         }
     });
+
+    var stackSettings = new StackSettings("stack-settings");
 
     // Export the service's IP address, hostname, and fully-qualified URL.
     return new Dictionary<string, object?>
