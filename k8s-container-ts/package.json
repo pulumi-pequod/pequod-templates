@@ -14,8 +14,8 @@
     "copkgs:install": "npm i @pequod/stackmgmt --no-save"
 },
   "dependencies": {
-    "@pulumi/kubernetes": "^3.0.0",
-    "@pulumi/pulumi": "^3.0.0",
-    "@pulumi/awsx": "^2.4.0"
+    "@pulumi/kubernetes": "^4.14.0",
+    "@pulumi/pulumi": "^3.121.0",
+    "@pulumi/awsx": "^2.12.0"
   }
 }
