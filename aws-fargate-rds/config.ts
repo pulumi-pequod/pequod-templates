@@ -5,7 +5,7 @@ import { RandomPassword } from "@pulumi/random";
 const config = new Config();
 
 // name base for naming conventions
-export let nameBase = config.get("nameBase") || `pequod-ecs-${getStack()}`;
+export let nameBase = config.get("nameBase") || `pqd-ecs-${getStack()}`;
 nameBase = nameBase.substring(0,22) // make sure the name isn't too long for AWS (once various suffixes are added)
 
 // Get db info
