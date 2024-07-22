@@ -8,10 +8,10 @@ template:
       description: Name of base k8s infra stack to use in form of "project/stack"
       default: pequod/shared-dev-eks/dev 
 
-config:
-  baseInfraStackName:
-    default: pequod/shared-dev-eks/dev 
-    type: string
+# config:
+#   baseInfraStackName:
+#     default: pequod/shared-dev-eks/dev 
+#     type: string
 
 variables: 
   kubeconfig: ${baseInfraStack.outputs["kubeconfig"]}
@@ -21,7 +21,7 @@ resources:
   baseInfraStack:
     type: pulumi:pulumi:StackReference
     properties:
-      name: ${baseInfraStackName}
+      name: pequod/shared-dev-eks/dev
   # Create a K8s provider using the kubeconfig retrieved as a stack reference above.
   k8sProvider: 
     type: pulumi:providers:kubernetes
@@ -54,6 +54,7 @@ resources:
       port: 6379
     options:
       provider: ${k8sProvider}
+      pluginDownloadURL: "github://api.github.com/pulumi-pequod/pequod-mlc-k8sapp"
   frontend: 
     type: k8sapp:ServiceDeployment
     properties:
@@ -64,6 +65,7 @@ resources:
       serviceType: LoadBalancer
     options:
       provider: ${k8sProvider}
+      pluginDownloadURL: "github://api.github.com/pulumi-pequod/pequod-mlc-k8sapp"
   # Set up stack config items
   stacksettings:
     type: stackmgmt:StackSettings 
