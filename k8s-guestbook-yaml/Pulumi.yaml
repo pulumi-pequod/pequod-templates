@@ -8,8 +8,14 @@ template:
       description: Name of base k8s infra stack to use in form of "project/stack"
       default: pequod/shared-dev-eks/dev 
 
+config:
+  baseInfraStackName:
+    default: pequod/shared-dev-eks/dev 
+    type: string
+
 variables: 
   kubeconfig: ${baseInfraStack.outputs["kubeconfig"]}
+
 resources: 
   # Create a stack reference that points at the base infrastructure stack.
   baseInfraStack:
@@ -27,6 +33,7 @@ resources:
     type: kubernetes:core/v1:Namespace
     options:
       provider: ${k8sProvider}
+      
   # Create K8s deployments using the custom k8s-servicedeployment multilanguage package
   redis-leader:
     type: k8sapp:ServiceDeployment
