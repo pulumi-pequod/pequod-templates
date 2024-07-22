@@ -11,7 +11,7 @@
     "install": "npm run esc:cologin && npm run copkgs:install",
     "esc:cologin": "esc run pequod/aws-access -- npm run co:login",
     "co:login": "aws codeartifact login --tool npm --region us-east-2 --repository pequod-codeartifact-repo --domain pequod-codeartifact-domain",
-    "copkgs:install": "npm i @pequod/stackmgmt --no-save"
+    "copkgs:install": "npm i @pequod/stackmgmt @pequod/k8sapp --no-save"
 },
   "dependencies": {
     "@pulumi/kubernetes": "^3.0.0",

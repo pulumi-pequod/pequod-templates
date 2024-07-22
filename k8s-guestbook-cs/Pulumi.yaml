@@ -1,0 +1,60 @@
+name: k8s-guestbook-yaml
+runtime: yaml
+
+variables:
+  baseName: 'guestbook'                                 # Replace with your namespace base name
+  kubeconfig: 'path/to/kubeconfig'                       # Replace with your kubeconfig path
+  driftManagement: true                                  # Replace with actual drift management value
+
+resources:
+  k8sProvider:
+    type: kubernetes:Provider
+    properties:
+      kubeconfig: "${kubeconfig}"
+      deleteUnreachable: true
+
+  guestbookNamespace:
+    type: kubernetes:core/v1:Namespace
+    properties:
+      metadata:
+        name: "${baseName}"
+    options:
+      provider: ${k8sProvider}
+
+  redisLeader:
+    type: k8sapp:ServiceDeployment
+    properties:
+      image: "redis"
+      namespace: "${guestbookNamespace.metadata.name}"
+      port: 6379
+    options:
+      provider: ${k8sProvider}
+
+  redisReplica:
+    type: k8sapp:ServiceDeployment
+    properties:
+      image: "pulumi/guestbook-redis-replica"
+      namespace: "${guestbookNamespace.metadata.name}"
+      port: 6379
+    options:
+      provider: ${k8sProvider}
+      
+  frontend:
+    type: k8sapp:ServiceDeployment
+    properties:
+      replicas: 3
+      image: "pulumi/guestbook-php-redis"
+      namespace: "${guestbookNamespace.metadata.name}"
+      port: 80
+      allocateIpAddress: true
+    options:
+      provider: ${k8sProvider}
+      
+  stackSettings:
+    type: stackmgmt:StackSettings
+    properties:
+      baseName: "${baseName}"
+      driftManagement: "${driftManagement}"
+
+outputs:
+  frontendIp: "http://${frontend.ipAddress}"
