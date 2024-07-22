@@ -17,20 +17,20 @@ const guestbookNsName = guestbookNamespace.metadata.name
 const redisLeader = new ServiceDeployment("redis-leader", {
     image: "redis",
     namespace: guestbookNsName,
-    ports: 6379,
+    port: 6379,
 }, { provider: k8sProvider });
 
 const redisReplica = new ServiceDeployment("redis-replica", {
     image: "pulumi/guestbook-redis-replica",
     namespace: guestbookNsName,
-    ports: 6379,
+    port: 6379,
 }, { provider: k8sProvider });
 
 const frontend = new ServiceDeployment("frontend", {
     replicas: 3,
     image: "pulumi/guestbook-php-redis",
     namespace: guestbookNsName,
-    ports: 80,
+    port: 80,
     allocateIpAddress: true,
 }, { provider: k8sProvider });
 
