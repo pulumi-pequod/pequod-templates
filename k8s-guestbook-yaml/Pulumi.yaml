@@ -2,7 +2,7 @@ name: ${PROJECT}
 description: ${DESCRIPTION}
 runtime: yaml
 template:
-  description: K8s application deployed to shared cluster.  important: true
+  description: K8s application deployed to shared cluster.  
   config:
     baseInfraStackName: 
       description: Name of base k8s infra stack to use in form of "project/stack"
