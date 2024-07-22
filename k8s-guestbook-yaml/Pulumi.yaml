@@ -37,16 +37,15 @@ resources:
   # Create K8s deployments using the custom k8s-servicedeployment multilanguage package
   redis-leader:
     type: k8sapp:ServiceDeployment
-    options:
-      pluginDownloadURL: "github://api.github.com/pulumi-pequod/pequod-mlc-k8sapp"
-      # optionally add a specific version
-      # version: v3.2.1
     properties:
       namespace: ${guestbook-yaml-ns.metadata.name}
       image: redis
       port: 6379
     options:
       provider: ${k8sProvider}
+      pluginDownloadURL: "github://api.github.com/pulumi-pequod/pequod-mlc-k8sapp"
+      # optionally add a specific version
+      # version: v3.2.1
   redis-replica: 
     type: k8sapp:ServiceDeployment
     properties:
