@@ -9,7 +9,7 @@ if project is None:
 
 owner = config.get('owner')
 if owner is None:
-    owner = os.environ['USER']
+    owner = pulumi.get_organization()
 
 subnet_cidr_blocks = config.get_object('subnet_cidr_blocks')
 if subnet_cidr_blocks is None:
