@@ -1,0 +1,3 @@
+pulumi>=3.5.1,<4.0.0
+pulumi-gcp>=7.0.0,<8.0.0
+pequod_stackmgmt @ git+https://github.com/pulumi-pequod/pequod-mlc-stackmgmt.git#subdirectory=sdk/python/bin
