@@ -1,0 +1,13 @@
+name: ${PROJECT}
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: ${DESCRIPTION}
+template:
+  description: A GCP VM instance and network.
+  config:
+    gcp:zone: 
+      description: GCP zone to deploy into.
+      default: us-central1-a    
+
