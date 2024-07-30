@@ -3,31 +3,20 @@ description: ${DESCRIPTION}
 runtime: yaml
 template:
   description: K8s application deployed to shared cluster.  
-  config:
-    baseInfraStackName: 
-      description: Name of base k8s infra stack to use in form of "project/stack"
-      default: pequod/shared-dev-eks/dev 
 
-# config:
-#   baseInfraStackName:
-#     default: pequod/shared-dev-eks/dev 
-#     type: string
-
-variables: 
-  kubeconfig: ${baseInfraStack.outputs["kubeconfig"]}
+config:
+  # This project is set up so kubconfig is provided via an ESC environment that uses a stack reference to get the kubeconfig from a base K8s cluster stack.
+  kubeconfig:
+    secret: true
 
 resources: 
-  # Create a stack reference that points at the base infrastructure stack.
-  baseInfraStack:
-    type: pulumi:pulumi:StackReference
-    properties:
-      name: pequod/shared-dev-eks/dev
   # Create a K8s provider using the kubeconfig retrieved as a stack reference above.
   k8sProvider: 
     type: pulumi:providers:kubernetes
     properties:
       kubeconfig: ${kubeconfig}
       deleteUnreachable: true
+
   # Create K8s namespace in which to deploy the services
   guestbook-yaml-ns:
     type: kubernetes:core/v1:Namespace
@@ -44,8 +33,6 @@ resources:
     options:
       provider: ${k8sProvider}
       pluginDownloadURL: "github://api.github.com/pulumi-pequod/pequod-mlc-k8sapp"
-      # optionally add a specific version
-      # version: v3.2.1
   redis-replica: 
     type: k8sapp:ServiceDeployment
     properties:
@@ -60,12 +47,13 @@ resources:
     properties:
       namespace: ${guestbook-yaml-ns.metadata.name}
       image: pulumi/guestbook-php-redis
-      ports: 80
+      port: 80
       replicas: 3
-      serviceType: LoadBalancer
+      allocateIpAddress: true
     options:
       provider: ${k8sProvider}
       pluginDownloadURL: "github://api.github.com/pulumi-pequod/pequod-mlc-k8sapp"
+
   # Set up stack config items
   stacksettings:
     type: stackmgmt:StackSettings 
@@ -73,5 +61,6 @@ resources:
       pluginDownloadURL: "github://api.github.com/pulumi-pequod/pequod-mlc-stackmgmt"
       # optionally add a specific version
       # version: v3.2.1
+
 outputs:
   frontEndUrl: http://${frontend.ipAddress}
