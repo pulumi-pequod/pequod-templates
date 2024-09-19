@@ -22,3 +22,9 @@ template:
     driftManagement:
       description: Set to "Refresh" to periodically refresh state or set to "Correct" to also run an update after refresh.
       default: Correct
+    eksNodeInstanceType:
+      description: Instance type to use for worker nodes
+      default: t3.medium
+    vpcNetworkCidr:
+      description: Network CIDR to use for new VPC
+      default: 10.0.0.0/16
