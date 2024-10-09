@@ -1,6 +1,6 @@
 from pulumi import ComponentResource, ResourceOptions
 import pulumi_aws as aws
-import netaddr # used for IP address manipulation
+import netaddr # using an off-the-shelf python package for IP address manipulation
 
 class NetworkArgs:
 
