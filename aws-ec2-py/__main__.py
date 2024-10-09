@@ -1,53 +1,25 @@
 import pulumi
 import pulumi_aws as aws
+
+# Use centrally managed custom component for stack settings.
 from pequod_stackmgmt import StackSettings, StackSettingsArgs
 
-# Get some configuration values or set default values.
-config = pulumi.Config()
-instance_type = config.get("instanceType")
-if instance_type is None:
-    instance_type = "t3.micro"
-vpc_network_cidr = config.get("vpcNetworkCidr")
-if vpc_network_cidr is None:
-    vpc_network_cidr = "10.0.0.0/16"
-num_instances = config.get_int("numInstances") or 1
-base_name = config.get("baseName") or f"{pulumi.get_project()}-{pulumi.get_stack()}"
+# Use local custom component for network.
+# Could also be published to a registry and imported from there.
+from local_components.network import Network, NetworkArgs
 
+# Import the configuration values using just a simple python file import.
+import config
 
-
-# Create VPC.
-vpc = aws.ec2.Vpc(f"{base_name}-vpc",
-    cidr_block=vpc_network_cidr,
-    enable_dns_hostnames=True,
-    enable_dns_support=True)
-
-# Create an internet gateway.
-gateway = aws.ec2.InternetGateway(f"{base_name}-gw", vpc_id=vpc.id)
-
-# Create a subnet that automatically assigns new instances a public IP address.
-subnet = aws.ec2.Subnet(f"{base_name}-subnet",
-    vpc_id=vpc.id,
-    cidr_block="10.0.1.0/24",
-    map_public_ip_on_launch=True)
-
-# Create a route table.
-route_table = aws.ec2.RouteTable(f"{base_name}-rt",
-    vpc_id=vpc.id,
-    routes=[aws.ec2.RouteTableRouteArgs(
-        cidr_block="0.0.0.0/0",
-        gateway_id=gateway.id,
-    )])
-
-# Associate the route table with the public subnet.
-route_table_association = aws.ec2.RouteTableAssociation(f"{base_name}-rta",
-    subnet_id=subnet.id,
-    route_table_id=route_table.id)
+# Create VPC using the custom component.
+network = Network(f"{config.base_name}-network", NetworkArgs(
+    cidr_block=config.vpc_network_cidr))
 
 # Create a security group allowing inbound access over port 80 and outbound
 # access to anywhere.
-sec_group = aws.ec2.SecurityGroup(f"{base_name}-sg",
+sec_group = aws.ec2.SecurityGroup(f"{config.base_name}-sg",
     description="Enable HTTP access",
-    vpc_id=vpc.id,
+    vpc_id=network.vpc_id,
     ingress=[
         aws.ec2.SecurityGroupIngressArgs(
             from_port=80,
@@ -87,12 +59,19 @@ sudo yum install -y python
 nohup sudo python -m http.server 80 &
 """
 
-# Loop and create instance(s).
-for i in range(num_instances):
-    server_name = f"{base_name}-{i}"
+# Loop and create instance(s) across the subnets created by the network component.
+num_subnets = len(network.subnet_ids) 
+for i in range(config.num_instances):
+    # Unique name for each instance.
+    server_name = f"{config.base_name}-{i}"
+
+    # Use modulo math to distribute the instances across the subnets.
+    subnet_id = network.subnet_ids[i % num_subnets]
+
+    # Create the instance
     server = aws.ec2.Instance(server_name,
-        instance_type=instance_type,
-        subnet_id=subnet.id,
+        instance_type=config.instance_type,
+        subnet_id=subnet_id,
         vpc_security_group_ids=[sec_group.id],
         user_data=user_data,
         ami=ami,
@@ -106,8 +85,6 @@ for i in range(num_instances):
     pulumi.export(f"{server_name} hostname", server.public_dns)
     pulumi.export(f"{server_name} url", pulumi.Output.concat("http://",server.public_dns))
 
-
-stackmgmt = StackSettings(f"{base_name}-stacksettings", 
-                          drift_management=config.get("driftManagement"))
-
-
+# Manage stack settings using the centrally manageed custom component.
+stackmgmt = StackSettings(f"{config.base_name}-stacksettings", 
+                          drift_management=config.driftManagement)
