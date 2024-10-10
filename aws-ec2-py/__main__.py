@@ -85,6 +85,6 @@ for i in range(config.num_instances):
     pulumi.export(f"{server_name} hostname", server.public_dns)
     pulumi.export(f"{server_name} url", pulumi.Output.concat("http://",server.public_dns))
 
-# Manage stack settings using the centrally manageed custom component.
+# Manage stack settings using the centrally managed custom component.
 stackmgmt = StackSettings(f"{config.base_name}-stacksettings", 
                           drift_management=config.driftManagement)
