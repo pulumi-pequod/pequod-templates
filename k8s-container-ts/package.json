@@ -9,7 +9,7 @@
     "esc:install": "curl -fsSL https://get.pulumi.com/esc/install.sh | sh",
     "esc:login": "esc login",
     "install": "npm run esc:cologin && npm run copkgs:install",
-    "esc:cologin": "esc run pequod/aws-access -- npm run co:login",
+    "esc:cologin": "esc run pequod/cloud-access/aws-access -- npm run co:login",
     "co:login": "aws codeartifact login --tool npm --region us-east-2 --repository pequod-codeartifact-repo --domain pequod-codeartifact-domain",
     "copkgs:install": "npm i @pequod/stackmgmt --no-save"
 },
