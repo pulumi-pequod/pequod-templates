@@ -7,3 +7,6 @@ template:
     baseInfraStackName: 
       description: Name of base k8s infra stack to use in form of "project/stack"
       default: shared-dev-eks/dev 
+    escEnvName:
+      description: Name of an ESC environment the web server will read for the messages it needs to send. Should include messages.announcement and/or messages.whisper
+      default: pequod/application/webserver-message

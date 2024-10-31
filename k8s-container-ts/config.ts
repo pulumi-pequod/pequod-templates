@@ -4,6 +4,7 @@ const config = new Config()
 
 export const baseName = config.get("baseName") || `${getProject()}-${getStack()}`
 export const driftManagement = config.get("driftManagement") || "Correct"
+export const escEnvName = config.get("escEnvName") 
 
 // The default set up for this template is to leverage the shared-k8s-cluster ESC environment for the kubeconfig.
 // However, if the kubeconfig is not found, then use the stack reference to get the kubeconfig.
