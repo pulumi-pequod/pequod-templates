@@ -3,6 +3,9 @@
 FROM oven/bun:1.0.14 as base
 WORKDIR /usr/src/app
 
+### NOTE ####
+# If the package.json is modified to include a new package, be sure to run `bun install` in this folder to regenerate the `bun.lockb` file.
+
 # install dependencies into temp directory
 # this will cache them and speed up future builds
 FROM base AS install
@@ -18,12 +21,12 @@ RUN cd /temp/prod && bun install --production
 # # copy node_modules from temp directory
 # # then copy all (non-ignored) project files into the image
 FROM install AS prerelease
-COPY --from=install /temp/dev/node_modules node_modules
+COPY --chown=bun:bun --from=install /temp/dev/node_modules node_modules
 COPY . .
 
 # copy production dependencies and source code into final image
 FROM base AS release
-COPY --from=install /temp/prod/node_modules node_modules
+COPY --chown=bun:bun --from=install /temp/prod/node_modules node_modules
 COPY --from=prerelease /usr/src/app/index.ts .
 COPY --from=prerelease /usr/src/app/package.json .
 

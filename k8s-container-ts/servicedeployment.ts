@@ -21,7 +21,7 @@ export class ServiceDeployment extends pulumi.ComponentResource {
             name,
             image: args.image,
             resources: args.resources || { requests: { cpu: "100m", memory: "100Mi" } },
-            env: [{ name: "GET_HOSTS_FROM", value: "dns" }],
+            env: [{ name: "GET_HOSTS_FROM", value: "dns" }].concat(args.envVars || []),
             ports: [{ containerPort: args.containerPort }],
         };
         this.deployment = new k8s.apps.v1.Deployment(name, {
@@ -76,4 +76,5 @@ export interface ServiceDeploymentArgs {
     hostPort: pulumi.Input<number>;
     allocateIpAddress?: boolean;
     isMinikube?: boolean;
+    envVars?: any[];
 }

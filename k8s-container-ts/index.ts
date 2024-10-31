@@ -4,7 +4,7 @@ import * as awsx from "@pulumi/awsx";
 import { StackSettings } from "@pequod/stackmgmt";
 
 import { ServiceDeployment } from "./servicedeployment";
-import { baseName, driftManagement, kubeconfig, pulumiAccessToken } from "./config";
+import { baseName, driftManagement, kubeconfig, pulumiAccessToken, escEnvName} from "./config";
 
 const imageRepository = new awsx.ecr.Repository("imageRepository", {
     forceDelete: true
@@ -25,12 +25,13 @@ const containerNamespace = new k8s.core.v1.Namespace(baseName, {}, {provider: k8
 const containerNsName = containerNamespace.metadata.name
 
 const frontend = new ServiceDeployment("frontend", {
-    replicas: 3,
+    replicas: 2,
     image: image.imageUri,
     namespace: containerNsName,
     containerPort: 8080,
     hostPort: 80,
     allocateIpAddress: true,
+    envVars: [{ name: "ESC_ENV_NAME", value: escEnvName}, { name: "PULUMI_ACCESS_TOKEN", value: pulumiAccessToken }],
 }, { provider: k8sProvider });
 
 const stackmgmt = new StackSettings(baseName, {driftManagement: driftManagement, pulumiAccessToken: pulumiAccessToken})
