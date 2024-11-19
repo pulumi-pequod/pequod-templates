@@ -12,7 +12,7 @@
     <!-- Set up the github package sources for components used by this template. -->
     <Target Name="AddGithubPackageSources">
         <Message Text="Adding Pequod.Stackmgmt source" />
-        <Exec Command="./pkg-utils/add_github_pkg.sh Pequod.Stackmgmt pequod/github-package-install" />
+        <Exec Command="./pkg-utils/add_github_pkg.sh Pequod.Stackmgmt pequod/github/github-package-install" />
     </Target> 
 
     <ItemGroup>
