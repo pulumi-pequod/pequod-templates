@@ -2,15 +2,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/pulumi-pequod/pequod-mlc-stackmgmt"
+	stackmgmt "github.com/pulumi-pequod/pequod-mlc-stackmgmt/sdk/go/stackmgmt"
 	"github.com/pulumi/pulumi-awsx/sdk/v2/go/awsx/ecr"
 	"github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes"
 	corev1 "github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes/core/v1"
 	metav1 "github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes/meta/v1"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
-
-//import { StackSettings } from "@pequod/stackmgmt";
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
@@ -71,7 +69,13 @@ func main() {
 			return err
 		}
 
-		//const stackmgmt = new StackSettings(baseName, {driftManagement: driftManagement, pulumiAccessToken: pulumiAccessToken})
+		_, err = stackmgmt.NewStackSettings(ctx, "stacksettings", &stackmgmt.StackSettingsArgs{
+			DriftManagement:      pulumi.String(config.DriftManagement),
+			PulumiAccessToken:    config.PulumiAccessToken,
+		})
+		if err != nil {
+			return err
+		}
 
 		url := frontend.IpAddress.ApplyT(func(ipAddr *string) string {
 			return fmt.Sprint("http://", *ipAddr)

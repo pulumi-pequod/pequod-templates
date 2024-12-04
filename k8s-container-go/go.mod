@@ -5,6 +5,7 @@ go 1.21.12
 toolchain go1.23.2
 
 require (
+	github.com/pulumi-pequod/pequod-mlc-stackmgmt/sdk v0.0.0-20241204011736-b53d8c396dac
 	github.com/pulumi/pulumi-awsx/sdk/v2 v2.19.0
 	github.com/pulumi/pulumi-kubernetes/sdk/v4 v4.18.3
 	github.com/pulumi/pulumi/sdk/v3 v3.141.0
