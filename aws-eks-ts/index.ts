@@ -13,7 +13,7 @@ const eksNodeInstanceType = config.get("eksNodeInstanceType") || "t3.medium";
 const vpcNetworkCidr = config.get("vpcNetworkCidr") || "10.0.0.0/16";
 const apiKey = config.requireSecret("datadogApiKey")
 
-const baseName = `${pulumi.getProject()}-${pulumi.getOrganization()}`
+const baseName = `${pulumi.getProject()}-${pulumi.getOrganization()}`.substring(0,34)
 
 // Create a new VPC
 const eksVpc = new awsx.ec2.Vpc(`${baseName}-vpc`, {
