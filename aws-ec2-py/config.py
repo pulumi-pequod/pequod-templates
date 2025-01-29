@@ -11,3 +11,4 @@ if vpc_network_cidr is None:
 num_instances = config.get_int("numInstances") or 1
 base_name = config.get("baseName") or f"{pulumi.get_project()}-{pulumi.get_stack()}"
 driftManagement = config.get("driftManagement")
+teamName = config.get("teamName")

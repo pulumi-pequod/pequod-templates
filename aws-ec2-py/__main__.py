@@ -87,4 +87,5 @@ for i in range(config.num_instances):
 
 # Manage stack settings using the centrally managed custom component.
 stackmgmt = StackSettings(f"{config.base_name}-stacksettings", 
-                          drift_management=config.driftManagement)
+                        team_assignment=config.teamName,
+                        drift_management=config.driftManagement)
