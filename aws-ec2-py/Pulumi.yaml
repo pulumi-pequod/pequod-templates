@@ -16,6 +16,9 @@ template:
     numInstances:
       description: Number of instances to deploy
       default: 1
+    teamName:
+      description: The name of the user's team 
+      default: devTeam
     vpcNetworkCidr:
       description: The network CIDR to use for the VPC
       default: 10.0.0.0/16
