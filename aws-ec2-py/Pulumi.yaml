@@ -18,7 +18,7 @@ template:
       default: 1
     teamName:
       description: The name of the user's team 
-      default: devTeam
+      default: DevTeam
     vpcNetworkCidr:
       description: The network CIDR to use for the VPC
       default: 10.0.0.0/16
