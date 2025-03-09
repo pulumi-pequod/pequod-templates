@@ -44,4 +44,3 @@ config:
     type: integer
     default: 512
  
-
