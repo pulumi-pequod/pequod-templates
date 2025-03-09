@@ -3,6 +3,16 @@ description: ${DESCRIPTION}
 runtime: yaml
 template:
   description: Pulumi YAML project that deploys an application using the container-services component.
+  config:
+    aws:region:
+      description: The AWS region to deploy into
+      default: us-east-2
+    cpu:
+      description: CPU in vCPUs. See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html 
+      default: 256
+    memory:
+      description: Memory in MiB
+      default: 512
 
 resources:
   dockerImage:
@@ -28,10 +38,9 @@ config:
     type: string
     default: ${PULUMI_PROJECT}
   cpu:
-    # CPU in vCPUs. See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html 
     type: integer
     default: 256
   memory:
-    # Memory in MiB
     type: integer
     default: 512
+ 
