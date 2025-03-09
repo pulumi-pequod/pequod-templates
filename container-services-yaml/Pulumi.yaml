@@ -26,6 +26,13 @@ resources:
       imageReference: ${dockerImage.imageRef}
       cpu: ${cpu}
       memory: ${memory}
+    # Set up stack config items
+  stacksettings:
+    type: stackmgmt:StackSettings 
+    options:
+      pluginDownloadURL: "github://api.github.com/pulumi-pequod/pequod-mlc-stackmgmt"
+      # optionally add a specific version
+      # version: v3.
 
 outputs:
   imageReference:
