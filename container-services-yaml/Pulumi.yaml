@@ -4,9 +4,6 @@ runtime: yaml
 template:
   description: Pulumi YAML project that deploys an application using the container-services component.
   config:
-    aws:region:
-      description: The AWS region to deploy into
-      default: us-east-2
     cpu:
       description: CPU in vCPUs. See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html 
       default: 256
@@ -26,19 +23,14 @@ resources:
       imageReference: ${dockerImage.imageRef}
       cpu: ${cpu}
       memory: ${memory}
-    # Set up stack config items
   stacksettings:
     type: stackmgmt:StackSettings 
     options:
       pluginDownloadURL: "github://api.github.com/pulumi-pequod/pequod-mlc-stackmgmt"
-      # optionally add a specific version
-      # version: v3.
 
 outputs:
-  imageReference:
-    value: ${dockerImage.imageRef}
-  serviceUrl:
-    value: http://${container.loadbalancerDnsName}
+  imageReference: ${dockerImage.imageRef}
+  serviceUrl: http://${container.loadbalancerDnsName}
 
 config:
   baseName:
