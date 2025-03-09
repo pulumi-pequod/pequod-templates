@@ -1,0 +1,4 @@
+packageDeclarationVersion: 1
+name: container-services
+version: 0.1.0
+downloadUrl: git://github.com/pulumi-pequod/component-container-services
