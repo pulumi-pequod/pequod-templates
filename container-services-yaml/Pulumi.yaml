@@ -1,0 +1,37 @@
+name: ${PROJECT}
+description: ${DESCRIPTION}
+runtime: yaml
+template:
+  description: Pulumi YAML project that deploys an application using the container-services component.
+
+resources:
+  dockerImage:
+    type: container-services:DockerBuildPush
+    properties:
+      dockerFilePath: ./app
+      destination: aws
+  container: 
+    type: container-services:ContainerRun
+    properties:
+      imageReference: ${dockerImage.imageRef}
+      cpu: ${cpu}
+      memory: ${memory}
+
+outputs:
+  imageReference:
+    value: ${dockerImage.imageRef}
+  serviceUrl:
+    value: http://${container.loadbalancerDnsName}
+
+config:
+  baseName:
+    type: string
+    default: ${PULUMI_PROJECT}
+  cpu:
+    # CPU in vCPUs. See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html 
+    type: integer
+    default: 256
+  memory:
+    # Memory in MiB
+    type: integer
+    default: 512
