@@ -13,12 +13,12 @@ template:
 
 resources:
   dockerImage:
-    type: container-services:DockerBuildPush
+    type: container-services:AppImage
     properties:
       dockerFilePath: ./app
       destination: aws
   container: 
-    type: container-services:ContainerRun
+    type: container-services:AppDeploy
     properties:
       imageReference: ${dockerImage.imageRef}
       cpu: ${cpu}
