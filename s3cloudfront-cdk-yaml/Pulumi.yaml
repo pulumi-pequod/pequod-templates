@@ -24,6 +24,10 @@ resources:
       source:
         fn::fileAsset: ./www/favicon.ico
       contentType: image/png
+  stacksettings:
+    type: stackmgmt:StackSettings 
+    options:
+      pluginDownloadURL: "github://api.github.com/pulumi-pequod/pequod-mlc-stackmgmt"
 outputs: 
   cloudFrontUrl: http://${cloudFront.cloudFrontDomain}
  
