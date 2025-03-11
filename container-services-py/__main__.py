@@ -21,9 +21,7 @@ app_service = AppDeploy(f"app-service-{pulumi.get_stack()}", AppDeployArgs(
 ))
 
 # Manage stack settings using the centrally managed custom component.
-stackmgmt = StackSettings(f"{config.base_name}-stacksettings", 
-                        team_assignment=config.teamName,
-                        drift_management=config.driftManagement)
+stackmgmt = StackSettings(f"{config.base_name}-stacksettings") 
 
 # Export the name of the bucket
 pulumi.export("image_reference", app_image.image_ref)
