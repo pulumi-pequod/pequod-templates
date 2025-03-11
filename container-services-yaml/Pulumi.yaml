@@ -12,12 +12,11 @@ template:
       default: 512
 
 resources:
-  dockerImage:
+  appImage:
     type: container-services:AppImage
     properties:
       dockerFilePath: ./app
-      destination: aws
-  container: 
+  appService: 
     type: container-services:AppDeploy
     properties:
       imageReference: ${dockerImage.imageRef}
