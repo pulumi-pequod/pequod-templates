@@ -32,9 +32,6 @@ outputs:
   serviceUrl: http://${appService.loadbalancerDnsName}
 
 config:
-  baseName:
-    type: string
-    default: ${PULUMI_PROJECT}
   cpu:
     type: integer
     default: 256
