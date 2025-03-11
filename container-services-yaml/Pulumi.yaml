@@ -19,7 +19,7 @@ resources:
   appService: 
     type: container-services:AppDeploy
     properties:
-      imageReference: ${dockerImage.imageRef}
+      imageReference: ${appImage.imageRef}
       cpu: ${cpu}
       memory: ${memory}
   stacksettings:
@@ -28,8 +28,8 @@ resources:
       pluginDownloadURL: "github://api.github.com/pulumi-pequod/pequod-mlc-stackmgmt"
 
 outputs:
-  imageReference: ${dockerImage.imageRef}
-  serviceUrl: http://${container.loadbalancerDnsName}
+  imageReference: ${appImage.imageRef}
+  serviceUrl: http://${appService.loadbalancerDnsName}
 
 config:
   baseName:
