@@ -1,0 +1,2 @@
+The need to have the component's `sdks` folder as part of the template will go away soon.
+Instead, the `Pulumi.yaml` will specify the components to import and the `pulumi` CLI will automatically set up the `sdks` folder with the given version of the component.
