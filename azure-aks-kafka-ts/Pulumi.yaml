@@ -1,8 +1,7 @@
-name: azure-aks-kafka-ts
+name: ${PROJECT}
 runtime: nodejs
-description: Pulumi project to deploy AKS and Kafka infrastructure
+description: ${DESCRIPTION}
 template:
-  # description: Azure AKS with Confluent Kafka and Datadog
   description: Azure AKS with Datadog Monitoring  
   config:
     azure-native:location: 
