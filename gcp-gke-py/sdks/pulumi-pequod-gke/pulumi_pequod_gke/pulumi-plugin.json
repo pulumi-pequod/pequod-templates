@@ -1,0 +1,6 @@
+{
+  "resource": true,
+  "name": "gke",
+  "version": "0.0.3",
+  "server": "git://github.com/pulumi-pequod/component-gke"
+}

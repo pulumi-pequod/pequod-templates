@@ -1,4 +1,3 @@
 environment:
-  - datadog-access
   - gcp-access
   - stackmgmt
