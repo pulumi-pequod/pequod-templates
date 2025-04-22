@@ -6,17 +6,12 @@
 
         <!-- Ignore the files in the app folder. -->
         <DefaultItemExcludes>app/**;$(DefaultItemExcludes)</DefaultItemExcludes>
+        <!-- Ignore the files generated for the Pulumi packages. -->
+        <DefaultItemExcludes>$(DefaultItemExcludes);sdks/**/*.cs</DefaultItemExcludes>
 
     </PropertyGroup>
 
-    <!-- Set up the github package sources for components used by this template. -->
-    <Target Name="AddGithubPackageSources">
-        <Message Text="Adding Pequod.Stackmgmt source" />
-        <Exec Command="./pkg-utils/add_github_pkg.sh Pequod.Stackmgmt pequod/github/github-package-install" />
-    </Target> 
-
     <ItemGroup>
-        <PackageReference Include="Pequod.Stackmgmt" Version="*"/>
         <PackageReference Include="Pulumi" Version="3.*" />
         <PackageReference Include="Pulumi.AzureNative" Version="2.*" />
         <PackageReference Include="Pulumi.Docker" Version="4.*" />

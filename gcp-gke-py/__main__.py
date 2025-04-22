@@ -15,7 +15,7 @@ import pulumi_kubernetes as k8s
 
 # MLC to create GKE cluster
 from pequod_gke import Cluster, ClusterArgs
-from pequod_stackmgmt import StackSettings
+from pulumi_pequod_stackmgmt import StackSettings, StackSettingsArgs
 from pequod_k8sdatadog import K8sMonitor
 
 # Stack Config
