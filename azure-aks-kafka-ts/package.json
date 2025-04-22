@@ -7,7 +7,7 @@
         "install": "npm run esc:cologin && npm run copkgs:install",
         "esc:cologin": "pulumi env run pequod/cloud-access/aws-access -- npm run co:login",
         "co:login": "aws codeartifact login --tool npm --region us-east-2 --repository pequod-codeartifact-repo --domain pequod-codeartifact-domain",
-        "copkgs:install": "npm i @pequod/k8sdatadog @pequod/stackmgmt @pequod/kafkacluster --no-save"
+        "copkgs:install": "npm i @pequod/k8sdatadog @pequod/kafkacluster --no-save"
     },
     "dependencies": {
         "@pulumi/azure": "^5.43.0",

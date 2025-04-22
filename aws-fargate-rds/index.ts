@@ -11,7 +11,7 @@ import * as pulumiservice from "@pulumi/pulumiservice";
 import { ec2, ecs } from "@pulumi/aws";
 
 // Platform team managed components
-import { StackSettings } from "@pequod/stackmgmt";
+import { StackSettings } from "@pulumi-pequod/stackmgmt";
 
 // Local components
 import { Network } from "./local-components/aws_network";

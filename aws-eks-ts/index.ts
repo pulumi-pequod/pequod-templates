@@ -2,7 +2,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as awsx from "@pulumi/awsx";
 import * as eks from "@pulumi/eks";
 import { K8sMonitor } from "@pequod/k8sdatadog";
-import { StackSettings } from "@pequod/stackmgmt";
+import { StackSettings } from "@pulumi-pequod/stackmgmt";
 
 // Grab some values from the Pulumi configuration (or use default values)
 const config = new pulumi.Config();

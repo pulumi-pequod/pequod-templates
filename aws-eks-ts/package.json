@@ -4,6 +4,12 @@
     "devDependencies": {
         "@types/node": "^18"
     },
+    "scripts": {
+        "install": "npm run esc:cologin && npm run copkgs:install",
+        "esc:cologin": "pulumi env run pequod/cloud-access/aws-access -- npm run co:login",
+        "co:login": "aws codeartifact login --tool npm --region us-east-2 --repository pequod-codeartifact-repo --domain pequod-codeartifact-domain",
+        "copkgs:install": "npm i @pequod/k8sdatadog --no-save"
+    },
     "dependencies": {
         "@pulumi/awsx": "^2.0.2",
         "@pulumi/eks": "^v2.0.0",
