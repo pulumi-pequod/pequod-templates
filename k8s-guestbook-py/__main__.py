@@ -14,7 +14,7 @@
 
 import pulumi
 import pulumi_kubernetes as k8s
-from pequod_stackmgmt import StackSettings
+from pulumi_pequod_stackmgmt import StackSettings, StackSettingsArgs
 
 # Local component
 from service_deployment import ServiceDeployment

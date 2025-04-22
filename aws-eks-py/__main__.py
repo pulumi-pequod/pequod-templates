@@ -5,7 +5,7 @@ import pulumi_awsx as awsx
 import pulumi_kubernetes as k8s
 
 # pequod packages
-from pequod_stackmgmt import StackSettings, StackSettingsArgs
+from pulumi_pequod_stackmgmt import StackSettings, StackSettingsArgs
 from pequod_k8sdatadog import K8sMonitor, K8sMonitorArgs
 
 # Get stack-specific config

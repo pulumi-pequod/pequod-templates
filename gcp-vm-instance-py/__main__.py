@@ -1,7 +1,7 @@
 from pulumi import export, Output
 
-# MLC that sets up schedules
-from pequod_stackmgmt import StackSettings
+# Component that sets up schedules and other stack-related settings.
+from pulumi_pequod_stackmgmt import StackSettings, StackSettingsArgs
 
 # Locally defined component resources.
 # Would likely be versioned and distributed as a package.

@@ -4,7 +4,7 @@ using Pulumi;
 using AzureNative = Pulumi.AzureNative;
 using Docker = Pulumi.Docker;
 using Random = Pulumi.Random;
-using Pequod.Stackmgmt;
+using PulumiPequod.Stackmgmt;
 
 return await Pulumi.Deployment.RunAsync(() =>
 {
