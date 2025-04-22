@@ -7,7 +7,6 @@
 
 // Pulumi SDKs
 import * as pulumi from "@pulumi/pulumi";
-import * as pulumiservice from "@pulumi/pulumiservice";
 import { ec2, ecs } from "@pulumi/aws";
 
 // Platform team managed components
