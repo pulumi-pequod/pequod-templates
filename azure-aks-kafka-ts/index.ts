@@ -4,7 +4,7 @@ import * as resources from "@pulumi/azure-native/resources";
 import * as k8s from "@pulumi/kubernetes";
 
 import { K8sMonitor} from "@pequod/k8sdatadog";
-import { StackSettings } from "@pequod/stackmgmt";
+import { StackSettings } from "@pulumi-pequod/stackmgmt";
 import { ConfluentCluster } from "@pequod/kafkacluster"; 
 
 // Custom component resources

@@ -1,5 +1,5 @@
 import * as aws from "@pulumi/aws";
-import { StackSettings } from "@pequod/stackmgmt";
+import { StackSettings } from "@pulumi-pequod/stackmgmt";
 import * as pulumi from "@pulumi/pulumi";
 
 const config = new pulumi.Config()

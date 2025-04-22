@@ -1,7 +1,7 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as k8s from "@pulumi/kubernetes";
 import * as awsx from "@pulumi/awsx";
-import { StackSettings } from "@pequod/stackmgmt";
+import { StackSettings } from "@pulumi-pequod/stackmgmt";
 
 import { ServiceDeployment } from "./servicedeployment";
 import { baseName, driftManagement, kubeconfig, pulumiAccessToken, escEnvName} from "./config";
