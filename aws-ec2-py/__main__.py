@@ -2,7 +2,7 @@ import pulumi
 import pulumi_aws as aws
 
 # Use centrally managed custom component for stack settings.
-from pequod_stackmgmt import StackSettings, StackSettingsArgs
+from pulumi_pequod_stackmgmt import StackSettings, StackSettingsArgs
 
 # Use local custom component for network.
 # Could also be published to a registry and imported from there.
