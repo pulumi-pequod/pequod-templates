@@ -2,7 +2,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as k8s from "@pulumi/kubernetes";
 
 import { StackSettings } from "@pulumi-pequod/stackmgmt";
-import { ServiceDeployment } from "@pequod/k8sapp";
+import { ServiceDeployment } from "@pulumi-pequod/k8sapp";
 
 import { baseName, driftManagement, kubeconfig, pulumiAccessToken } from "./config";
 
@@ -17,20 +17,22 @@ const guestbookNsName = guestbookNamespace.metadata.name
 const redisLeader = new ServiceDeployment("redis-leader", {
     image: "redis",
     namespace: guestbookNsName,
-    port: 6379,
+    containerPort: 6379,
+    allocateIpAddress: false,
 }, { provider: k8sProvider });
 
 const redisReplica = new ServiceDeployment("redis-replica", {
     image: "pulumi/guestbook-redis-replica",
     namespace: guestbookNsName,
-    port: 6379,
+    containerPort: 6379,
+    allocateIpAddress: false,
 }, { provider: k8sProvider });
 
 const frontend = new ServiceDeployment("frontend", {
     replicas: 3,
     image: "pulumi/guestbook-php-redis",
     namespace: guestbookNsName,
-    port: 80,
+    containerPort: 80,
     allocateIpAddress: true,
 }, { provider: k8sProvider });
 

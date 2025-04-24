@@ -13,7 +13,6 @@
         "strictNullChecks": true
     },
     "files": [
-        "index.ts",
-        "servicedeployment.ts"
+        "index.ts"
     ]
 }

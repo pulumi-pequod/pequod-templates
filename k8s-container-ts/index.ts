@@ -1,9 +1,10 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as k8s from "@pulumi/kubernetes";
 import * as awsx from "@pulumi/awsx";
-import { StackSettings } from "@pulumi-pequod/stackmgmt";
 
-import { ServiceDeployment } from "./servicedeployment";
+import { StackSettings } from "@pulumi-pequod/stackmgmt";
+import { ServiceDeployment } from "@pulumi-pequod/k8sapp";
+
 import { baseName, driftManagement, kubeconfig, pulumiAccessToken, escEnvName} from "./config";
 
 const imageRepository = new awsx.ecr.Repository("imageRepository", {

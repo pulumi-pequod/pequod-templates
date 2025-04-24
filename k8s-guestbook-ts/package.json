@@ -1,15 +1,9 @@
 {
-  "name": "guestbook-easy",
-  "version": "0.1.0",
+  "name": "guestbook",
+  "version": "1.0.0",
   "devDependencies": {
     "@types/node": "^12.0.0"
   },
-  "scripts": {
-    "install": "npm run esc:cologin && npm run copkgs:install",
-    "esc:cologin": "pulumi env run pequod/cloud-access/aws-access -- npm run co:login",
-    "co:login": "aws codeartifact login --tool npm --region us-east-2 --repository pequod-codeartifact-repo --domain pequod-codeartifact-domain",
-    "copkgs:install": "npm i @pequod/k8sapp --no-save"
-},
   "dependencies": {
     "@pulumi/kubernetes": "^4.0.0",
     "@pulumi/pulumi": "^3.0.0"
