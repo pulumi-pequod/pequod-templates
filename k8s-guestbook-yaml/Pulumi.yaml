@@ -11,58 +11,50 @@ config:
   kubeconfig:
     secret: true
 
-resources: 
+resources:
   # Create a K8s provider using the kubeconfig retrieved as a stack reference above.
-  k8sProvider: 
+  k8sProvider:
     type: pulumi:providers:kubernetes
     properties:
       kubeconfig: ${kubeconfig}
       deleteUnreachable: true
-
   # Create K8s namespace in which to deploy the services
   guestbook-yaml-ns:
     type: kubernetes:core/v1:Namespace
     options:
       provider: ${k8sProvider}
-      
   # Create K8s deployments using the custom k8s-servicedeployment multilanguage package
   redis-leader:
     type: k8sapp:ServiceDeployment
     properties:
       namespace: ${guestbook-yaml-ns.metadata.name}
       image: redis
-      port: 6379
+      containerPort: 6379
+      allocateIpAddress: false
     options:
       provider: ${k8sProvider}
-      pluginDownloadURL: "github://api.github.com/pulumi-pequod/pequod-mlc-k8sapp"
-  redis-replica: 
+  redis-replica:
     type: k8sapp:ServiceDeployment
     properties:
       namespace: ${guestbook-yaml-ns.metadata.name}
       image: pulumi/guestbook-redis-replica
-      port: 6379
+      containerPort: 6379
+      allocateIpAddress: false
     options:
       provider: ${k8sProvider}
-      pluginDownloadURL: "github://api.github.com/pulumi-pequod/pequod-mlc-k8sapp"
-  frontend: 
+  frontend:
     type: k8sapp:ServiceDeployment
     properties:
       namespace: ${guestbook-yaml-ns.metadata.name}
       image: pulumi/guestbook-php-redis
-      port: 80
+      containerPort: 80
       replicas: 3
       allocateIpAddress: true
     options:
       provider: ${k8sProvider}
-      pluginDownloadURL: "github://api.github.com/pulumi-pequod/pequod-mlc-k8sapp"
-
   # Set up stack config items
   stacksettings:
-    type: stackmgmt:StackSettings 
-    options:
-      pluginDownloadURL: "github://api.github.com/pulumi-pequod/pequod-mlc-stackmgmt"
-      # optionally add a specific version
-      # version: v3.2.1
+    type: stackmgmt:StackSettings
 
 outputs:
   frontEndUrl: http://${frontend.ipAddress}

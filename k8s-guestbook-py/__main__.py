@@ -15,9 +15,8 @@
 import pulumi
 import pulumi_kubernetes as k8s
 from pulumi_pequod_stackmgmt import StackSettings, StackSettingsArgs
+from pulumi_pequod_k8sapp import ServiceDeployment, ServiceDeploymentArgs
 
-# Local component
-from service_deployment import ServiceDeployment
 # Local modules
 import config
 
@@ -32,14 +31,16 @@ ServiceDeployment(
     "redis-leader",
     namespace=guestbook_ns_name,
     image="redis",
-    ports=[6379], 
+    container_port=6379, 
+    allocate_ip_address=False,
     opts=pulumi.ResourceOptions(provider=k8s_provider))
 
 ServiceDeployment(
     "redis-replica",
     namespace=guestbook_ns_name,
     image="pulumi/guestbook-redis-replica",
-    ports=[6379],
+    container_port=6379,
+    allocate_ip_address=False,
     opts=pulumi.ResourceOptions(provider=k8s_provider))
 
 frontend = ServiceDeployment(
@@ -47,7 +48,7 @@ frontend = ServiceDeployment(
     namespace=guestbook_ns_name,
     image="pulumi/guestbook-php-redis",
     replicas=3,
-    ports=[80],
+    container_port=80,
     allocate_ip_address=True,
     opts=pulumi.ResourceOptions(provider=k8s_provider))
 
