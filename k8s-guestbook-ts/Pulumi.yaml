@@ -2,9 +2,10 @@ name: ${PROJECT}
 runtime: nodejs
 packages:
   stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v1.0.1
+  k8sapp: https://github.com/pulumi-pequod/component-k8sapp@v1.0.1
 description: ${DESCRIPTION}
 template:
-  description: K8s application deployed to shared cluster.
+  description: K8s guestbook application deployed to shared cluster.
   config:
     baseInfraStackName: 
       description: Name of base k8s infra stack to use in form of "project/stack"
