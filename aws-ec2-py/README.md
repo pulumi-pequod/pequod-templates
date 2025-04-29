@@ -2,7 +2,7 @@
 
 Deploys:
 - VPC and subnets
-- User-specified number of EC instances distributed across subnets
+- User-specified number of EC instances distributed across subnets running simple application
 
 ## Demonstrated Capabilities
 - Local component resource (`Network`)

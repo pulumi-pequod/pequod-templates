@@ -1,11 +1,13 @@
-# Azure Kuberenetes Service Python
+# AWS EKS Typescript
 
 Deploys:
-- Azure Kubernetes Service cluster
-- Kubernetes deployment (`Datadog Helm chart`)
+- VPC and subnets
+- AWS Elastic Kubernetes Service cluster
+- Kubernetes deployment  (Datadog Helm chart)
 
 ## Demonstrated Capabilities
-- Local component resource (`AksCluster`)
+- Pulumi AWSx package
+- Pulumi EKS package
 - Remote Pulumi component(s) (`StackSettings`)
 - Multilanguage component (`Datadog K8sMonitor`)
 
@@ -13,4 +15,3 @@ Deploys:
 These templates can be deployed onto the cluster:
 - "k8s-container-*" 
 - "k8s-guestbook-*" 
-

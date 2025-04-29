@@ -1,7 +1,9 @@
-# Google Cloud Network and Instance with ComponentResource
+# Google Cloud Instance Python
 
-This example uses `pulumi.ComponentResource` as described [here](https://www.pulumi.com/docs/intro/concepts/resources/#components)
-to create a Google Cloud Network and instance.
+Deploys:
+- Networking
+- Instance running simple application
 
-The use of `pulumi.ComponentResource` demonstrates how multiple low-level resources
-can be composed into a higher-level, reusable abstraction.
+## Demonstrated Capabilities
+- Local component resources(`Network`, `Server`)
+- Remote Pulumi component(s) (`StackSettings`)
