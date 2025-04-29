@@ -1,6 +1,5 @@
 # AWS EKS Python
 
-## Overview
 Deploys:
 - VPC and subnets
 - AWS Elastic Kubernetes Service cluster

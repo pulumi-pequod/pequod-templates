@@ -1,6 +1,5 @@
 # AWS EC2 Python
 
-## Overview
 Deploys:
 - VPC and subnets
 - User-specified number of EC instances distributed across subnets
