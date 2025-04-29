@@ -1,4 +1,4 @@
-# Azure Kuberenetes Service Python
+# Azure Kuberenetes Service Typescript
 
 Deploys:
 - Azure Kubernetes Service cluster
