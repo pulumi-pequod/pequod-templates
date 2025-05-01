@@ -1,4 +1,4 @@
 environment:
-  - datadog-access
-  - gcp-access
-  - stackmgmt
+  - software-services/datadog-access
+  - cloud-access/gcp-access
+  - platform-team/stackmgmt
