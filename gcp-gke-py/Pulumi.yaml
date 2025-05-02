@@ -3,11 +3,12 @@ runtime:
   name: python
   options:
     virtualenv: venv
-packages:
-  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v1.0.1
 description: ${DESCRIPTION}
+packages:
+  component-gke: https://github.com/pulumi-pequod/component-gke@v1.0.0
+  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v1.0.1
 template:
-  description: A Google Kubernetes Engine (GKE) cluster, with canary deployment
+  description: Pulumi program that uses a Pulumi Component to deploy a Google Kubernetes Engine (GKE) cluster and canary deployment
   config:
     gcp:zone: 
       description: GCP zone to deploy into.

@@ -2,7 +2,6 @@
 Deploys:
 - GKE cluster and node pool
 - Canary deployment on the cluster
-- Datadog K8s monitor on the cluster
 """
 
 # Pulumi-provided packages
@@ -13,10 +12,9 @@ from pulumi_kubernetes.core.v1 import ContainerArgs, EnvVarArgs, PodSpecArgs, Po
 from pulumi_kubernetes.meta.v1 import LabelSelectorArgs, ObjectMetaArgs
 import pulumi_kubernetes as k8s
 
-# MLC to create GKE cluster
-from pequod_gke import Cluster, ClusterArgs
+# Pequod Components
+from pulumi_pequod_gke import Cluster, ClusterArgs
 from pulumi_pequod_stackmgmt import StackSettings, StackSettingsArgs
-from pequod_k8sdatadog import K8sMonitor
 
 # Stack Config
 config = pulumi.Config()
@@ -56,13 +54,8 @@ canary = Deployment("canary",
     opts=pulumi.ResourceOptions(provider=k8s_provider)
 )
 
-# datadog_k8s_agent = K8sMonitor(f"{service_name}-mon", 
-#    api_key=config.require_secret("datadogApiKey"),
-#    opts=pulumi.ResourceOptions(provider=k8s_provider))
-
 stackmgmt = StackSettings(f"{service_name}-stacksettings", 
                           drift_management=config.get("driftManagement"))
 
 pulumi.export('kubeconfig', k8s_cluster.kubeconfig)
 pulumi.export("cluster_name", k8s_cluster.cluster_name)
-# pulumi.export('datadogDashboard', k8s_cluster.cluster_name.apply(lambda name: f"https://app.datadoghq.com/dash/integration/86/kubernetes---overview?refresh_mode=sliding&tpl_var_cluster%5B0%5D={name}&live=true".lower()))

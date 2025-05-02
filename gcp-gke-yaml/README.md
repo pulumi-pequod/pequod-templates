@@ -1,4 +1,4 @@
-# Google Kuberenetes Engine Python
+# Google Kuberenetes Engine YAML
 
 Deploys:
 - Google Kubernetes Engine cluster
@@ -13,5 +13,6 @@ These templates can be deployed onto the cluster:
 - "k8s-container-*" 
 - "k8s-guestbook-*" 
 
-This template can be used to compare this Python example with a YAML example:
-- "gcp-gke-yaml"
+This template can be used to compare this YAML example with a Python example:
+- "gcp-gke-py"
+
