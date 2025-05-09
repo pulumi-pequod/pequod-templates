@@ -1,7 +1,7 @@
 name: ${PROJECT}
 runtime: nodejs
 packages:
-  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v1.1.6
+  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v1.1.7
 description: ${DESCRIPTION}
 template:
   description: AWS Serverless Application
