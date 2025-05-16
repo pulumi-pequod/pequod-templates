@@ -29,13 +29,15 @@ export class Frontend extends ComponentResource {
     const vpcId = args.vpcId
     const subnetIds = args.subnetIds
 
+    // Owner tag
+    const tags = { "Owner": pulumi.getOrganization() }
 
     // Create security group for accessing the application.
     const feSgName = `${name}-fe-sg`
     const feSecGroup = new ec2.SecurityGroup(feSgName, {
         vpcId: vpcId,
         description: "Allow all HTTP(S) traffic.",
-        tags: { "Name": feSgName },
+        tags: { "Name": feSgName, "Owner": pulumi.getOrganization() },
         ingress: [
             {
                 cidrBlocks: ["0.0.0.0/0"],
@@ -63,7 +65,8 @@ export class Frontend extends ComponentResource {
     // Load balancer to front the application.
     const alb = new lb.LoadBalancer(`${name}-alb`, {
       securityGroups: [feSecGroup.id],
-      subnets: subnetIds
+      subnets: subnetIds,
+      tags: tags,
     }, {parent: this});
 
     const atg = new lb.TargetGroup(`${name}-tg`, {
@@ -77,7 +80,8 @@ export class Frontend extends ComponentResource {
         timeout: 4,
         protocol: "HTTP",
         matcher: "200-399"
-      }
+      },
+      tags: tags,
     }, {parent: this})
 
     const wl = new lb.Listener(`${name}-listener`, {
@@ -87,6 +91,7 @@ export class Frontend extends ComponentResource {
         type: "forward",
         targetGroupArn: atg.arn
       }],
+      tags: tags,
     }, {parent: this})
 
     // Role and ECS task and service definition.
@@ -102,6 +107,7 @@ export class Frontend extends ComponentResource {
           'Action': 'sts:AssumeRole',
         }]
       }),
+      tags: tags,
     }, {parent: this});
 
     const rpa = new iam.RolePolicyAttachment(`${name}-task-policy`, {
@@ -172,6 +178,7 @@ export class Frontend extends ComponentResource {
       requiresCompatibilities: ["FARGATE"],
       executionRoleArn: role.arn,
       containerDefinitions: containerDefinitions,
+      tags: tags,
     }, {parent: this})
 
     const service = new ecs.Service(`${name}-app-svc`, {
@@ -188,7 +195,8 @@ export class Frontend extends ComponentResource {
         targetGroupArn: atg.arn,
         containerName: appContainerName,
         containerPort: 80
-      }]
+      }],
+      tags: tags,
     }, {parent: this})
 
     this.frontendUrl = interpolate`http://${alb.dnsName}`

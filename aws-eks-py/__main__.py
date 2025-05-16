@@ -17,13 +17,17 @@ min_size = config.get_int("minClusterSize") or 1
 vpc_network_cidr = config.get("network_cidr") or "10.0.0.0/16"
 eks_node_instance_type = config.get("node_instance_type") or "t2.medium"
 
+# Owner tag
+tags = { "Owner": pulumi.get_organization() }
+
 # Create a new VPC
 eks_vpc = awsx.ec2.Vpc(f"{base_name}-vpc",
                        enable_dns_hostnames=True,
                        cidr_block=vpc_network_cidr,
                        nat_gateways=awsx.ec2.NatGatewayConfigurationArgs(
                            strategy=awsx.ec2.NatGatewayStrategy.SINGLE
-                       ))
+                       ),
+                       tags=tags)
 
 # Create the EKS cluster
 eks_cluster = eks.Cluster(f"{base_name}-eks",
@@ -36,7 +40,8 @@ eks_cluster = eks.Cluster(f"{base_name}-eks",
                           max_size=max_size,
                           node_associate_public_ip_address=False,
                           endpoint_private_access=False,
-                          endpoint_public_access=True)
+                          endpoint_public_access=True,
+                          tags=tags,)
 
 
 # Instantiate a Kubernetes provider

@@ -28,7 +28,7 @@ const rdsSgName = `${nameBase}-rds-sg`
 const rdsSecGroup = new ec2.SecurityGroup(rdsSgName, {
     vpcId: network.vpcId,
     description: "Allow DB client access.",
-    tags: { "Name": rdsSgName },
+    tags: { "Name": rdsSgName, "Owner": pulumi.getOrganization() },
     ingress: [{
         cidrBlocks: ["0.0.0.0/0"],
         fromPort: 3306,
@@ -41,7 +41,7 @@ const rdsSecGroup = new ec2.SecurityGroup(rdsSgName, {
         fromPort: 0,
         toPort: 0,
         cidrBlocks: ["0.0.0.0/0"],
-    }]
+    }],
 });
 
 // Create a backend DB instance

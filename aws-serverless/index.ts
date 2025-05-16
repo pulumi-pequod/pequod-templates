@@ -7,6 +7,7 @@ const config = new pulumi.Config()
 const bucket = new aws.s3.Bucket("main", {
     acl: "private",
     forceDestroy: true,
+    tags: { "Owner": pulumi.getOrganization() },
 });
 
 bucket.onObjectCreated("logger", new aws.lambda.CallbackFunction<aws.s3.BucketEvent, void>("loggerFn", {

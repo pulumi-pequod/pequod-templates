@@ -6,8 +6,10 @@ class NetworkArgs:
 
     def __init__(self,
                  cidr_block='10.100.0.0/16',
+                 tags=None,
                  ):
         self.cidr_block = cidr_block
+        self.tags = tags
 
 
 class Network(ComponentResource):
@@ -19,19 +21,21 @@ class Network(ComponentResource):
 
         super().__init__('custom:resource:Network', name, {}, opts)
 
-
+        tags = args.tags or {}
 
         # Create VPC.
         vpc = aws.ec2.Vpc(f"{name}-vpc",
             cidr_block=args.cidr_block,
             enable_dns_hostnames=True,
             enable_dns_support=True,
+            tags=tags,
             opts=ResourceOptions(parent=self))
         self.vpc_id = vpc.id
 
         # Create an internet gateway.
         gateway = aws.ec2.InternetGateway(f"{name}-gw", 
             vpc_id=vpc.id,
+            tags=tags,
             opts=ResourceOptions(parent=self))
 
         # Create a route table.
@@ -41,6 +45,7 @@ class Network(ComponentResource):
                 cidr_block="0.0.0.0/0",
                 gateway_id=gateway.id,
             )],
+            tags=tags,
             opts=ResourceOptions(parent=self))
 
         # Get all the zones in the region being used.
@@ -61,15 +66,14 @@ class Network(ComponentResource):
             zone_name = all_zones.names[i]
             subnet_cidr = str(ipSubnets[i])
 
+            snet_tags={ 'Name': f'{subnet_name_base}-{zone_name}' } | tags
             vpc_subnet = aws.ec2.Subnet(f'{subnet_name_base}-{zone_name}',
                 assign_ipv6_address_on_creation=False,
                 vpc_id=vpc.id,
                 map_public_ip_on_launch=True,
                 cidr_block=subnet_cidr,
                 availability_zone=zone_name,
-                tags={
-                    'Name': f'{subnet_name_base}-{zone_name}',
-                },
+                tags=snet_tags,
                 opts=ResourceOptions(parent=self)
                 )
             aws.ec2.RouteTableAssociation(

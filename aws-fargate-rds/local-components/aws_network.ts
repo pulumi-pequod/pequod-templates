@@ -1,4 +1,4 @@
-import { ComponentResource, ComponentResourceOptions, interpolate, Output } from "@pulumi/pulumi";
+import { ComponentResource, ComponentResourceOptions, getOrganization, interpolate, Output } from "@pulumi/pulumi";
 import { ec2, getAvailabilityZonesOutput } from "@pulumi/aws";
 
 // Interface for Network
@@ -23,7 +23,8 @@ export class Network extends ComponentResource {
       enableDnsHostnames: args.enableDnsHostnames ?? true,
       enableDnsSupport: args.enableDnsSupport ?? true,
       tags: {
-        "Name": vpcName
+        "Name": vpcName,
+        "Owner": getOrganization(),
       },
     }, { parent: this })
 
@@ -31,7 +32,8 @@ export class Network extends ComponentResource {
     const igw = new ec2.InternetGateway(igwName, {
       vpcId: vpc.id,
       tags: {
-        "Name": igwName
+        "Name": igwName,
+        "Owner": getOrganization(),
       }
     }, { parent: this })
 
@@ -43,7 +45,8 @@ export class Network extends ComponentResource {
         gatewayId: igw.id
       }],
       tags: {
-        "Name": rtName
+        "Name": rtName,
+        "Owner": getOrganization(),
       }
     }, { parent: this })
 
@@ -61,7 +64,8 @@ export class Network extends ComponentResource {
             cidrBlock: `10.100.${snetIds.length}.0/24`,
             availabilityZone: zoneNames[index],
             tags: {
-                "Name": interpolate`${subnetNameBase}-${zoneNames[index]}`
+                "Name": interpolate`${subnetNameBase}-${zoneNames[index]}`,
+                "Owner": getOrganization()
             }
         }, { parent: this })
 

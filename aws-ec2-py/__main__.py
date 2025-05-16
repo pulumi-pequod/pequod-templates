@@ -11,9 +11,13 @@ from local_components.network import Network, NetworkArgs
 # Import the configuration values using just a simple python file import.
 import config
 
+# Owner tag
+tags = { "Owner": pulumi.get_organization() }
+
 # Create VPC using the custom component.
 network = Network(f"{config.base_name}-network", NetworkArgs(
-    cidr_block=config.vpc_network_cidr))
+    cidr_block=config.vpc_network_cidr,
+    tags=tags))
 
 # Create a security group allowing inbound access over port 80 and outbound
 # access to anywhere.
@@ -39,7 +43,8 @@ sec_group = aws.ec2.SecurityGroup(f"{config.base_name}-sg",
         to_port=0,
         protocol="-1",
         cidr_blocks=["0.0.0.0/0"],
-    )])
+    )], 
+    tags=tags)
 
 # Create and launch EC2 instance(s) into the public subnet.
 
@@ -69,15 +74,14 @@ for i in range(config.num_instances):
     subnet_id = network.subnet_ids[i % num_subnets]
 
     # Create the instance
+    instance_tags = { "Name": server_name } | tags
     server = aws.ec2.Instance(server_name,
         instance_type=config.instance_type,
         subnet_id=subnet_id,
         vpc_security_group_ids=[sec_group.id],
         user_data=user_data,
         ami=ami,
-        tags={
-            "Name": server_name,
-        }, 
+        tags=instance_tags, 
         opts=pulumi.ResourceOptions(replace_on_changes=["user_data"]))
 
     # Export the instance's publicly accessible IP address and hostname.
