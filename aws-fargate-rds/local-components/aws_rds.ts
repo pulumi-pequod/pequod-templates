@@ -26,7 +26,7 @@ export class Db extends pulumi.ComponentResource {
     const rdsSubnetGroupName = `${name}-sng`;
     const rdsSubnetGroup = new rds.SubnetGroup(rdsSubnetGroupName, {
       subnetIds: args.subnetIds,
-      tags: { "Name": rdsSubnetGroupName},
+      tags: { "Name": rdsSubnetGroupName, "Owner": pulumi.getOrganization() },
     }, { parent: this });
 
     // RDS DB
@@ -44,6 +44,7 @@ export class Db extends pulumi.ComponentResource {
       storageType: "gp2",
       skipFinalSnapshot: true,
       publiclyAccessible: args.publicAccess ?? false,
+      tags: { "Name": rdsName, "Owner": pulumi.getOrganization() },
     }, { parent: this });
 
     this.dbAddress = db.address;

@@ -15,13 +15,17 @@ const apiKey = config.requireSecret("datadogApiKey")
 
 const baseName = `${pulumi.getProject()}-${pulumi.getOrganization()}`.substring(0,34)
 
+// Owner tag
+const tags = { "Owner": pulumi.getOrganization() }
+
 // Create a new VPC
 const eksVpc = new awsx.ec2.Vpc(`${baseName}-vpc`, {
     enableDnsHostnames: true,
     cidrBlock: vpcNetworkCidr,
     natGateways: {
         strategy: awsx.ec2.NatGatewayStrategy.Single
-    }
+    },
+    tags: tags,
 });
 
 // Create the EKS cluster
@@ -42,6 +46,7 @@ const eksCluster = new eks.Cluster(`${baseName}-eks`, {
     // Change these values for a private cluster (VPN access required)
     endpointPrivateAccess: false,
     endpointPublicAccess: true,
+    tags: tags,
 });
 
 const datadogK8sAgent = new K8sMonitor(baseName, {
