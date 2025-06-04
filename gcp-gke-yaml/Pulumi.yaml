@@ -3,7 +3,7 @@ runtime: yaml
 description: ${DESCRIPTION}
 packages:
   component-gke: https://github.com/pulumi-pequod/component-gke@v0.0.6
-  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.0.1
+  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.1.0
 template:
   description: Pulumi program that uses a Pulumi Component to deploy a Google Kubernetes Engine (GKE) cluster and canary deployment
   config:

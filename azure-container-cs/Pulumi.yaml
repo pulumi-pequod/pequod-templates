@@ -1,7 +1,7 @@
 name: ${PROJECT}
 runtime: dotnet
 packages:
-  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.0.1
+  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.1.0
 description: ${DESCRIPTION}
 template:
   description: A C# program to deploy a containerized service on Azure

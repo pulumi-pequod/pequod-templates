@@ -3,7 +3,7 @@
 name: ${PROJECT}
 runtime: go
 packages:
-  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.0.1
+  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.1.0
 description: ${DESCRIPTION}
 template:
   description: K8s container deployed to shared cluster.

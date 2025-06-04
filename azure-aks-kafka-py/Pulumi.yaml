@@ -5,7 +5,7 @@ runtime:
     options:
         virtualenv: venv
 packages:
-  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.0.1
+  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.1.0
 template:
   # description: Azure AKS with Confluent Kafka and Datadog
   description: Azure AKS with Datadog Monitoring
