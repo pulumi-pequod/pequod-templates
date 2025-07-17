@@ -30,6 +30,7 @@ const eksVpc = new awsx.ec2.Vpc(`${baseName}-vpc`, {
 
 // Create the EKS cluster
 const eksCluster = new eks.Cluster(`${baseName}-eks`, {
+    authenticationMode: eks.AuthenticationMode.API,
     // Put the cluster in the new VPC created earlier
     vpcId: eksVpc.vpcId,
     // Public subnets will be used for load balancers
@@ -50,7 +51,7 @@ const eksCluster = new eks.Cluster(`${baseName}-eks`, {
 });
 
 const datadogK8sAgent = new K8sMonitor(baseName, {
-    apiKey: apiKey,
+    datadogApiKey: apiKey,
 }, {provider: eksCluster.provider})
 
 const stackmgmt = new StackSettings(baseName, {driftManagement: config.get("driftManagement")})
