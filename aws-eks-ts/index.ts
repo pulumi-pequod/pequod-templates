@@ -1,7 +1,7 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as awsx from "@pulumi/awsx";
 import * as eks from "@pulumi/eks";
-import { K8sMonitor } from "@pequod/k8sdatadog";
+import { K8sMonitor } from "@pulumi-pequod/k8sdatadog";
 import { StackSettings } from "@pulumi-pequod/stackmgmt";
 
 // Grab some values from the Pulumi configuration (or use default values)
