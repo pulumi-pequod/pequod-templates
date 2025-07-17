@@ -6,7 +6,7 @@ import pulumi_kubernetes as k8s
 
 # pequod packages
 from pulumi_pequod_stackmgmt import StackSettings, StackSettingsArgs
-from pequod_k8sdatadog import K8sMonitor, K8sMonitorArgs
+from pulumi_pequod_k8sdatadog import K8sMonitor, K8sMonitorArgs 
 
 # Get stack-specific config
 config = pulumi.Config()
@@ -31,6 +31,7 @@ eks_vpc = awsx.ec2.Vpc(f"{base_name}-vpc",
 
 # Create the EKS cluster
 eks_cluster = eks.Cluster(f"{base_name}-eks",
+                          authentication_mode=eks.AuthenticationMode.API,
                           vpc_id=eks_vpc.vpc_id,
                           public_subnet_ids=eks_vpc.public_subnet_ids,
                           private_subnet_ids=eks_vpc.private_subnet_ids,
@@ -50,7 +51,7 @@ k8sprovider = k8s.Provider(f"{base_name}-k8sprovider", kubeconfig=kubeconfig)
 
 # Deploy the Datadog agent
 datadog_k8s_agent = K8sMonitor(f"{base_name}-mon", 
-    api_key=config.require_secret("datadogApiKey"),
+    datadog_api_key=config.require_secret("datadogApiKey"),
     opts=pulumi.ResourceOptions(provider=k8sprovider))
 
 # Manage stack settings
