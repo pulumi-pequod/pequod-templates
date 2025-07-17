@@ -5,6 +5,7 @@ runtime:
     virtualenv: venv
 packages:
   stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.1.0
+  k8sdatadog: https://github.com/pulumi-pequod/component-k8sdatadog
 description: ${DESCRIPTION}
 template:
   description: AWS VPC and EKS Deployment with Datadog
