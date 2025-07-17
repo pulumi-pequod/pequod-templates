@@ -50,7 +50,7 @@ const eksCluster = new eks.Cluster(`${baseName}-eks`, {
 });
 
 const datadogK8sAgent = new K8sMonitor(baseName, {
-    apiKey: apiKey,
+    datadogApiKey: apiKey,
 }, {provider: eksCluster.provider})
 
 const stackmgmt = new StackSettings(baseName, {driftManagement: config.get("driftManagement")})
