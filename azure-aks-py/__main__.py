@@ -4,9 +4,8 @@ from pulumi_azure_native import resources
 import pulumi_kubernetes as k8s
 
 # Pequod SDKs
-from pequod_k8sdatadog import K8sMonitor
+from pulumi_pequod_k8sdatadog import K8sMonitor, K8sMonitorArgs 
 from pulumi_pequod_stackmgmt import StackSettings, StackSettingsArgs
-from pequod_kafkacluster import ConfluentCluster 
 
 # Components
 from azure_aks import AksCluster, AksClusterArgs
@@ -27,16 +26,8 @@ cluster = AksCluster(base_name, AksClusterArgs(
     admin_username=config.admin_username,
 ), opts=ResourceOptions())
 
-## Kafka temporarily removed while we wait for our Confluent Cloud account.
-# kafka = ConfluentCluster(f"{base_name}-kafka", 
-#     kafka_cluster_name=config.kafka_cluster_name,
-#     kafka_topics=config.kafka_topics
-# )
-# export("kafkaUrl", kafka.kafka_url)
-# export("kafkaEnvironmentName", kafka.env_id)
-
 datadog_k8s_agent = K8sMonitor(f"{base_name}-mon", 
-    api_key=config.datadog_api_key,
+    datadog_api_key=config.datadog_api_key,
     opts=ResourceOptions(provider=cluster.k8s_provider))
 
 stackmgmt = StackSettings(f"{base_name}-stacksettings", 

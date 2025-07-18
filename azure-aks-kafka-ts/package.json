@@ -3,14 +3,7 @@
     "devDependencies": {
         "@types/node": "^10.0.0"
     },
-    "scripts": {
-        "install": "npm run esc:cologin && npm run copkgs:install",
-        "esc:cologin": "pulumi env run pequod/cloud-access/aws-access -- npm run co:login",
-        "co:login": "aws codeartifact login --tool npm --region us-east-2 --repository pequod-codeartifact-repo --domain pequod-codeartifact-domain",
-        "copkgs:install": "npm i @pequod/k8sdatadog @pequod/kafkacluster --no-save"
-    },
     "dependencies": {
-        "@pulumi-pequod/stackmgmt": "file:sdks/pulumi-pequod-stackmgmt",
         "@pulumi/azure": "^6.22.0",
         "@pulumi/azure-native": "^3.0.0",
         "@pulumi/azuread": "^6.0.0",
