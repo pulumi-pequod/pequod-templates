@@ -3,9 +3,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as resources from "@pulumi/azure-native/resources";
 import * as k8s from "@pulumi/kubernetes";
 
-import { K8sMonitor} from "@pequod/k8sdatadog";
+import { K8sMonitor } from "@pulumi-pequod/k8sdatadog";
 import { StackSettings } from "@pulumi-pequod/stackmgmt";
-import { ConfluentCluster } from "@pequod/kafkacluster"; 
 
 // Custom component resources
 import { K8sCluster } from "./k8scluster"; // TODO: maybe move to central artifactory
@@ -15,14 +14,6 @@ import * as config from "./config";
 
 const baseName = config.baseName;
 const rgName = `${baseName}-rg`
-
-//// Kafka temporarily removed while we wait for our Confluent Cloud account.
-// const kafka = new ConfluentCluster(baseName, {
-//     kafkaClusterName: config.kafkaClusterName,
-//     kafkaTopics: config.kafkaTopics
-// })
-// export const kafkaUrl = kafka.kafkaUrl;
-// export const kafkaEnvironmentName = kafka.envId;
 
 const resourceGroup = new resources.ResourceGroup(rgName, { resourceGroupName: rgName } );
 
@@ -40,7 +31,7 @@ const k8sProvider = new k8s.Provider("k8sprovider", {
 })
 
 const datadogK8sAgent = new K8sMonitor(baseName, {
-    apiKey: config.apiKey,
+    datadogApiKey: config.apiKey,
 }, {provider: k8sProvider})
 
 const stackmgmt = new StackSettings(baseName, {driftManagement: config.driftManagement})
