@@ -1,3 +1,0 @@
-environment:
-  - cloud-access/gcp-access
-  - platform-team/stackmgmt

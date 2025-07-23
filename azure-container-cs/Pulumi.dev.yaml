@@ -1,3 +1,0 @@
-environment:
-  - cloud-access/azure-access
-  - platform-team/stackmgmt

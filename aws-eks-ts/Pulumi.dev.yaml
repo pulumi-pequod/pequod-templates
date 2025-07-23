@@ -1,4 +1,0 @@
-environment:
-  - cloud-access/aws-access
-  - software-services/datadog-access
-  - platform-team/stackmgmt

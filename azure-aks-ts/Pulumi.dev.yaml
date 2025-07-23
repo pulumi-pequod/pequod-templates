@@ -1,5 +1,0 @@
-environment:
-  - cloud-access/azure-access
-  - software-services/confluent-access
-  - software-services/datadog-access
-  - platform-team/stackmgmt
