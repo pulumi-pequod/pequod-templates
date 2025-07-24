@@ -1,7 +1,7 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as azure_native from "@pulumi/azure-native";
-import { StackSettings } from "stackmgmt";
-import { AppBuildDeploy } from "containerapps";
+import { StackSettings } from "@pulumi-pequod/stackmgmt";
+import { AppBuildDeploy } from "@pulumi-pequod/containerapps";
 
 const config = new pulumi.Config();
 const insightsSku = config.get("insightsSku") || "PerGB2018";
