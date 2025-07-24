@@ -1,5 +1,6 @@
 {
 	"name": "azure-containerapps-ts",
+	"main": "index.ts",
 	"devDependencies": {
 		"@types/node": "^18"
 	},
