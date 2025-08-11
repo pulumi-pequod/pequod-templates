@@ -3,7 +3,7 @@ description: ${DESCRIPTION}
 runtime: yaml
 packages:
   container-services: https://github.com/pulumi-pequod/component-container-services@v1.1.0
-  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.1.0
+  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.2.1
 template:
   description: Pulumi YAML project that deploys an application using the container-services component.
   config:

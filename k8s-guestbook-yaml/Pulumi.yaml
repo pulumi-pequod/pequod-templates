@@ -2,7 +2,7 @@ name: ${PROJECT}
 description: ${DESCRIPTION}
 runtime: yaml
 packages:
-  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.1.0
+  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.2.1
   k8sapp: https://github.com/pulumi-pequod/component-k8sapp@v1.0.3
 template:
   description: K8s application deployed to shared cluster.  
