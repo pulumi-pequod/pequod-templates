@@ -5,7 +5,7 @@ runtime:
   options:
     virtualenv: venv
 packages:
-  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.1.0
+  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.2.1
 template:
   description: Deploy one or more EC2 instances running a simple webserver.
   config:
