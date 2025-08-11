@@ -4,7 +4,7 @@ runtime:
   options:
     virtualenv: venv
 packages:
-  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.2.1
+  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.2.4
 description: ${DESCRIPTION}
 template:
   description: A GCP VM instance and network.

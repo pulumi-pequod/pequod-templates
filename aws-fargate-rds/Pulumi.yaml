@@ -1,7 +1,7 @@
 name: ${PROJECT}
 runtime: nodejs
 packages:
-  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.2.1
+  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.2.4
 description: ${DESCRIPTION}
 template:
   description: AWS ALB + ECS Fargate + RDS with Datadog Monitoring
