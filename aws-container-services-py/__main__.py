@@ -1,5 +1,4 @@
 import pulumi
-from pulumi_aws import s3
 from pulumi_pequod_stackmgmt import StackSettings, StackSettingsArgs
 
 from pulumi_pequod_container_services import AppImageDeploy, AppImageDeployArgs
@@ -16,5 +15,5 @@ app_deployment = AppImageDeploy(f"app-deployment", AppImageDeployArgs(
 # Manage stack settings using the centrally managed custom component.
 stackmgmt = StackSettings("stacksettings") 
 
-# Export the name of the bucket
+# Export URL for the service
 pulumi.export("service_url", pulumi.Output.concat("http://",app_deployment.loadbalancer_dns_name))
