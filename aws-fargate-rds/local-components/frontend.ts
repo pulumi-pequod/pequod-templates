@@ -29,15 +29,15 @@ export class Frontend extends ComponentResource {
     const vpcId = args.vpcId
     const subnetIds = args.subnetIds
 
-    // Owner tag
-    const tags = { "Owner": pulumi.getOrganization() }
+    // Tags for resources
+    const tags = { }
 
     // Create security group for accessing the application.
     const feSgName = `${name}-fe-sg`
     const feSecGroup = new ec2.SecurityGroup(feSgName, {
         vpcId: vpcId,
         description: "Allow all HTTP(S) traffic.",
-        tags: { "Name": feSgName, "Owner": pulumi.getOrganization() },
+        tags: { "Name": feSgName, },
         ingress: [
             {
                 cidrBlocks: ["0.0.0.0/0"],

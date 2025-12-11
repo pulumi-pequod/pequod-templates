@@ -11,8 +11,8 @@ from local_components.network import Network, NetworkArgs
 # Import the configuration values using just a simple python file import.
 import config
 
-# Owner tag
-tags = { "Owner": pulumi.get_organization() }
+# Tags to apply to all resources.
+tags = { }
 
 # Create VPC using the custom component.
 network = Network(f"{config.base_name}-network", NetworkArgs(

@@ -24,7 +24,6 @@ export class Network extends ComponentResource {
       enableDnsSupport: args.enableDnsSupport ?? true,
       tags: {
         "Name": vpcName,
-        "Owner": getOrganization(),
       },
     }, { parent: this })
 
@@ -33,7 +32,6 @@ export class Network extends ComponentResource {
       vpcId: vpc.id,
       tags: {
         "Name": igwName,
-        "Owner": getOrganization(),
       }
     }, { parent: this })
 
@@ -46,7 +44,6 @@ export class Network extends ComponentResource {
       }],
       tags: {
         "Name": rtName,
-        "Owner": getOrganization(),
       }
     }, { parent: this })
 
@@ -65,7 +62,6 @@ export class Network extends ComponentResource {
             availabilityZone: zoneNames[index],
             tags: {
                 "Name": interpolate`${subnetNameBase}-${zoneNames[index]}`,
-                "Owner": getOrganization()
             }
         }, { parent: this })
 
