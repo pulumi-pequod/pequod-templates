@@ -28,7 +28,7 @@ const rdsSgName = `${nameBase}-rds-sg`
 const rdsSecGroup = new ec2.SecurityGroup(rdsSgName, {
     vpcId: network.vpcId,
     description: "Allow DB client access.",
-    tags: { "Name": rdsSgName, "Owner": pulumi.getOrganization() },
+    tags: { "Name": rdsSgName },
     ingress: [{
         cidrBlocks: ["0.0.0.0/0"],
         fromPort: 3306,
