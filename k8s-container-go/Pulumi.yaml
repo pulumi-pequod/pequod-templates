@@ -1,5 +1,3 @@
-### There are issues with go programs using Pulumi Components that require some additional investigation before
-### this template can be used. For now, this template is disabled.
 name: ${PROJECT}
 runtime: go
 packages:
