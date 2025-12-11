@@ -5,7 +5,7 @@ runtime:
   options:
     virtualenv: venv
 packages:
-  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.2.4
+  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@2.2.4
 template:
   description: Deploy one or more EC2 instances running a simple webserver.
   config:
@@ -17,9 +17,9 @@ template:
       default: t3.micro
     numInstances:
       description: Number of instances to deploy
-      default: 1
+      default: "1"
     teamName:
-      description: The name of the user's team 
+      description: The name of the user's team
       default: DevTeam
     vpcNetworkCidr:
       description: The network CIDR to use for the VPC
