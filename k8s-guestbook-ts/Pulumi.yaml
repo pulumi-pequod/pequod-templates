@@ -1,8 +1,8 @@
 name: ${PROJECT}
 runtime: nodejs
 packages:
-  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.2.4
-  k8sapp: https://github.com/pulumi-pequod/component-k8sapp@v1.0.3
+  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.2.5
+  k8sapp: https://github.com/pulumi-pequod/component-k8sapp@v1.2.11
 description: ${DESCRIPTION}
 template:
   description: K8s guestbook application deployed to shared cluster.
