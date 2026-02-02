@@ -2,8 +2,8 @@ name: ${PROJECT}
 description: ${DESCRIPTION}
 runtime: nodejs
 packages:
-  containerapps: https://github.com/pulumi-pequod/component-containerapps@v1.3.3
-  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.2.5
+  containerapps: https://github.com/pulumi-pequod/component-containerapps@v1.3.4
+  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.2.6
 template:
   description: Typescript program that leverages Components to create an Azure Container App and deploys a custom Docker image to it.
   config:
