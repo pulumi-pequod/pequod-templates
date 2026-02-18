@@ -1,5 +1,5 @@
-name: ${PROJECT}
-description: ${DESCRIPTION}
+name: aws-container-services-py-1
+description: Pulumi Python project that deploys an application using AWS container services.
 runtime: python
 packages:
   container-services: https://github.com/pulumi-pequod/component-container-services@v1.1.3

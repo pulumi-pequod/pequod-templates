@@ -1,1 +1,5 @@
 pulumi>=3.0.0,<4.0.0
+pulumi-aws>=7.0.0,<8.0.0
+pulumi-awsx>=3.0.0,<4.0.0
+sdks/pulumi-pequod-stackmgmt
+sdks/pulumi-pequod-container-services
