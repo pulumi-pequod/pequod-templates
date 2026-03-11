@@ -6,7 +6,7 @@ runtime:
     virtualenv: venv
 packages:
   containerapps: https://github.com/pulumi-pequod/component-containerapps@v1.3.3
-  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.2.5
+  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.3.2
 template:
   description: Python program that leverages Components to create an Azure Container App and deploys a custom Docker image to it.
   config:
