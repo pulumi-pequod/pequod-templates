@@ -42,6 +42,78 @@
 
     <build>
         <plugins>
+            <!-- Copy generated Pulumi component SDK sources and resources into
+                 the project before compilation. pulumi install generates Java
+                 SDKs under sdks/ but does not merge them into src/
+                 automatically. Both Java sources and classpath resources
+                 (e.g. version.txt) must be copied. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-container-services-sdk-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/sdks/pulumi-pequod-container-services/src/main/java</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-container-services-sdk-resources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.basedir}/src/main/resources</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/sdks/pulumi-pequod-container-services/src/main/resources</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-stackmgmt-sdk-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/sdks/pulumi-pequod-stackmgmt/src/main/java</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-stackmgmt-sdk-resources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.basedir}/src/main/resources</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/sdks/pulumi-pequod-stackmgmt/src/main/resources</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
