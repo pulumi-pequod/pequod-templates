@@ -3,7 +3,7 @@ description: ${DESCRIPTION}
 runtime: java
 packages:
   container-services: https://github.com/pulumi-pequod/component-container-services@v1.1.5
-  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.3.2
+  stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.4.0
 template:
   description: Pulumi Java project that deploys an application using the container-services component.
   config:
