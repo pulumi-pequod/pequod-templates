@@ -4,7 +4,7 @@ packages:
   stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.4.0
 description: ${DESCRIPTION}
 template:
-  displayName: AWS serverless application
+  displayName: AWS serverless application (TypeScript)
   description: AWS Serverless Application
   config:
     aws:region:
