@@ -4,7 +4,7 @@ packages:
   stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.4.0
 description: ${DESCRIPTION}
 template:
-  displayName: AWS Fargate with RDS and Datadog
+  displayName: AWS Fargate with RDS and Datadog (TypeScript)
   description: AWS ALB + ECS Fargate + RDS with Datadog Monitoring
   config:
     aws:region:
