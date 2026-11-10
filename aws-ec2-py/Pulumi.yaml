@@ -7,6 +7,7 @@ runtime:
 packages:
   stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.4.0
 template:
+  displayName: AWS EC2 web servers (Python)
   description: Deploy one or more EC2 instances running a simple webserver.
   config:
     aws:region:
