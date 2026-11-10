@@ -4,6 +4,7 @@ packages:
   stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.4.0
 description: ${DESCRIPTION}
 template:
+  displayName: Kubernetes container on shared cluster (Go)
   description: K8s container deployed to shared cluster.
   config:
     baseInfraStackName: 

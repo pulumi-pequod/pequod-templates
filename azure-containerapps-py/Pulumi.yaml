@@ -8,6 +8,7 @@ packages:
   containerapps: https://github.com/pulumi-pequod/component-containerapps@v1.3.3
   stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.4.0
 template:
+  displayName: Azure Container App (Python)
   description: Python program that leverages Components to create an Azure Container App and deploys a custom Docker image to it.
   config:
     azure-native:location:

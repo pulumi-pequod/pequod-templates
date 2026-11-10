@@ -8,6 +8,7 @@ packages:
   k8sapp: https://github.com/pulumi-pequod/component-k8sapp@v1.0.3
 description: ${DESCRIPTION}
 template:
+  displayName: Kubernetes guestbook on shared cluster (Python)
   description: K8s application deployed to shared cluster.
   config:
     base_infra_stack_name: 

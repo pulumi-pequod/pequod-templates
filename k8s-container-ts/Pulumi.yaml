@@ -5,6 +5,7 @@ packages:
   k8sapp: https://github.com/pulumi-pequod/component-k8sapp@v1.2.11
 description: ${DESCRIPTION}
 template:
+  displayName: Kubernetes container on shared cluster (TypeScript)
   description: K8s container deployed to shared cluster.
   config:
     baseInfraStackName: 

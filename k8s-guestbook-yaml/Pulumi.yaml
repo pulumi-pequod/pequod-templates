@@ -5,6 +5,7 @@ packages:
   stackmgmt: https://github.com/pulumi-pequod/component-stackmgmt@v2.4.0
   k8sapp: https://github.com/pulumi-pequod/component-k8sapp@v1.0.3
 template:
+  displayName: Kubernetes guestbook on shared cluster (YAML)
   description: K8s application deployed to shared cluster.  
 
 config:
