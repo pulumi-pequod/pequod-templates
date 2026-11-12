@@ -1,6 +1,8 @@
 from pulumi import ComponentResource, ResourceOptions
 from pulumi_gcp import compute
 
+from naming import gcp_resource_name
+
 
 class ServerArgs:
 
@@ -28,6 +30,9 @@ class Server(ComponentResource):
                  opts: ResourceOptions = None):
 
         super().__init__("pequod:local:Server", name, {}, opts)
+
+        # Guard against names that GCP rejects (uppercase, too long, etc.).
+        name = gcp_resource_name(name)
 
         firewall = compute.Firewall(name,
                                     network=args.subnet.network,
