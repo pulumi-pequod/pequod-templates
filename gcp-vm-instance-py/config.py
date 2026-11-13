@@ -1,11 +1,24 @@
-import os
+import re
 import pulumi
+
+
+def gcp_name(name: str, max_len: int = 45) -> str:
+    """Make name a valid GCP RFC 1035 label (lowercase, starts with a letter).
+
+    max_len leaves room for Pulumi's 8-char autoname suffix and the "-webserver"
+    suffix added in __main__.py, keeping the final name within GCP's 63 chars.
+    """
+    name = re.sub(r"[^a-z0-9-]+", "-", name.lower()).strip("-")
+    name = re.sub(r"^[^a-z]+", "", name)
+    return name[:max_len].rstrip("-") or "r"
+
 
 config = pulumi.Config()
 
 project = config.get('project')
 if project is None:
     project = f"{pulumi.get_project()}-{pulumi.get_stack()}"
+project = gcp_name(project)
 
 owner = config.get('owner')
 if owner is None:
